@@ -1,0 +1,17 @@
+{
+  "name": "EarlySignup",
+  "type": "object",
+  "properties": {
+    "name": { "type": "string" },
+    "email": { "type": "string" },
+    "phone": { "type": "string" },
+    "type": {
+      "type": "string",
+      "enum": ["Musician", "Client"],
+      "default": "Client"
+    },
+    "city": { "type": "string" },
+    "message": { "type": "string" }
+  },
+  "required": ["name", "email", "type"]
+}

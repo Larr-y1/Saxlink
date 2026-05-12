@@ -1,0 +1,48 @@
+{
+  "name": "Booking",
+  "type": "object",
+  "properties": {
+    "client_name": { "type": "string" },
+    "client_email": { "type": "string" },
+    "musician_id": { "type": "string" },
+    "musician_name": { "type": "string" },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "Wedding",
+        "Corporate Dinner",
+        "Restaurant Night",
+        "Hotel Lounge",
+        "Private Party",
+        "Festival"
+      ]
+    },
+    "event_date": { "type": "string", "format": "date" },
+    "event_time": { "type": "string" },
+    "event_location": { "type": "string" },
+    "amount": { "type": "number" },
+    "booking_status": {
+      "type": "string",
+      "enum": ["Pending", "Accepted", "Payment Secured", "Completed", "Paid"],
+      "default": "Pending"
+    },
+    "payment_status": {
+      "type": "string",
+      "enum": ["Unpaid", "Paid (secured)", "Ready for payout", "Paid out"],
+      "default": "Unpaid"
+    },
+    "notes": { "type": "string" },
+    "rating": { "type": "number" },
+    "review": { "type": "string" },
+    "musician_marked_done": { "type": "boolean", "default": false },
+    "client_confirmed": { "type": "boolean", "default": false }
+  },
+  "required": [
+    "client_name",
+    "client_email",
+    "musician_name",
+    "event_type",
+    "event_date",
+    "amount"
+  ]
+}

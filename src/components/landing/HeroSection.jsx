@@ -1,0 +1,295 @@
+
+import { Search, MapPin, Calendar, ArrowRight, Music2, Sparkles } from 'lucide-react';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
+import SoundWave from './SoundWave';
+import heroImg from '@/assets/hero-premium.png';
+
+export default function HeroSection() {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const handleMouseMove = (e) => {
+    const { clientX, clientY } = e;
+    const { innerWidth, innerHeight } = window;
+    mouseX.set((clientX / innerWidth) - 0.5);
+    mouseY.set((clientY / innerHeight) - 0.5);
+  };
+
+  return (
+    <section 
+      onMouseMove={handleMouseMove}
+      className="relative min-h-[120vh] flex items-center justify-center overflow-hidden bg-background pt-32 pb-72 transition-colors duration-1000"
+    >
+      {/* Background Video / Cinematic Layer */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        {/* Dynamic Overlay for Light/Dark visibility */}
+        <div className="absolute inset-0 bg-white/40 dark:bg-black/60 backdrop-blur-[1px] z-10 transition-colors duration-1000" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background z-20" />
+        
+        <video 
+          autoPlay 
+          muted 
+          loop 
+          playsInline
+          className="w-full h-full object-cover opacity-50 dark:opacity-60 contrast-110 saturate-100"
+          poster={heroImg}
+        >
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-saxophonist-playing-in-a-dark-room-41315-large.mp4" type="video/mp4" />
+        </video>
+        <SoundWave />
+      </div>
+      
+      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
+        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
+          
+          {/* LEFT CONTENT - Floating Typography */}
+          <div className="flex-[1.2] text-center lg:text-left z-20">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="inline-flex items-center gap-3 bg-secondary/5 dark:bg-white/5 border border-secondary/10 dark:border-white/10 rounded-full px-6 py-2.5 mb-12 backdrop-blur-xl transition-colors"
+            >
+              <motion.div 
+                animate={{ rotate: 360 }}
+                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+              >
+                <Sparkles className="w-4 h-4 text-primary" />
+              </motion.div>
+              <span className="text-[10px] font-bold text-primary uppercase tracking-[0.4em]">The Obsidian Tier residencies</span>
+            </motion.div>
+
+            <div className="relative">
+              <motion.h1 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="font-heading text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black leading-[0.9] tracking-[-0.06em] lg:-ml-2 text-foreground dark:text-white transition-colors"
+              >
+                <span className="block mb-2">Find the</span>
+                <span className="relative inline-block text-primary italic font-light drop-shadow-2xl">
+                  Perfect
+                  <motion.div 
+                    className="absolute -bottom-4 left-0 w-full h-2 bg-primary/20 blur-xl -z-10"
+                    animate={{ scaleX: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
+                    transition={{ duration: 4, repeat: Infinity }}
+                  />
+                </span>
+                <span className="block mt-2 font-heading">Saxophonist</span>
+                <span className="block mt-2 text-4xl md:text-5xl lg:text-6xl text-foreground dark:text-foreground/80 transition-colors">for Your Event</span>
+              </motion.h1>
+              
+              {/* Bespoke Rotating Seal Badge */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 1 }}
+                className="absolute -top-24 -right-12 hidden xl:flex w-40 h-40 items-center justify-center"
+              >
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                  className="absolute inset-0"
+                >
+                  <svg viewBox="0 0 100 100" className="w-full h-full text-primary/60 dark:text-primary/40">
+                    <path
+                      id="textPath"
+                      d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
+                      fill="none"
+                    />
+                    <text fontSize="8" fontWeight="bold" fill="currentColor" letterSpacing="2">
+                      <textPath href="#textPath">
+                        CURATED ARTISTRY • MIDNIGHT RESIDENCIES • OBSIDIAN TIER • 
+                      </textPath>
+                    </text>
+                  </svg>
+                </motion.div>
+                <div className="w-16 h-16 rounded-full bg-primary/20 dark:bg-primary/10 border border-primary/20 flex items-center justify-center backdrop-blur-md">
+                  <Music2 className="w-6 h-6 text-primary" />
+                </div>
+              </motion.div>
+            </div>
+
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="mt-12 text-xl md:text-2xl text-foreground dark:text-white/60 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium md:font-light transition-colors"
+            >
+              Book verified, world-class saxophonists for weddings, corporate events, restaurants, and private parties — all in one place.
+            </motion.p>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+              className="flex flex-wrap justify-center lg:justify-start gap-8 mt-24"
+            >
+              <MagneticButton>
+                <Button className="rounded-full px-12 py-9 text-lg bg-primary hover:bg-primary/90 text-white shadow-[0_20px_50px_rgba(var(--primary),0.3)] transition-all group overflow-hidden relative border-none">
+                  <span className="relative z-10 flex items-center">
+                    Discover Artists <ArrowRight className="w-5 h-5 ml-3 group-hover:translate-x-2 transition-transform" />
+                  </span>
+                  <motion.div 
+                    className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500"
+                  />
+                </Button>
+              </MagneticButton>
+              <Button variant="ghost" className="rounded-full px-12 py-9 text-lg hover:bg-secondary/5 dark:hover:bg-white/5 text-foreground dark:text-foreground border border-secondary/10 dark:border-white/10 backdrop-blur-sm transition-all">
+                Join as Musician
+              </Button>
+            </motion.div>
+          </div>
+
+          {/* RIGHT CONTENT - Cinematic Visuals with Floating Parallax */}
+          <div className="flex-1 relative w-full perspective-1000">
+            <motion.div 
+              style={{ 
+                rotateX: useTransform(mouseY, [-0.5, 0.5], [5, -5]),
+                rotateY: useTransform(mouseX, [-0.5, 0.5], [-5, 5])
+              }}
+              className="relative z-10 aspect-[3/4] rounded-[4rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] border border-white/10 group"
+            >
+              <motion.img 
+                src={heroImg} 
+                alt="Saxophonist performing" 
+                className="w-full h-full object-cover scale-110 group-hover:scale-125 transition-transform duration-[2s]"
+                style={{
+                  x: useTransform(mouseX, [-0.5, 0.5], [10, -10]),
+                  y: useTransform(mouseY, [-0.5, 0.5], [10, -10])
+                }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-tr from-background/90 via-transparent to-primary/20 mix-blend-multiply transition-opacity group-hover:opacity-60" />
+              
+              {/* Floating Artist Detail Overlay */}
+              <motion.div 
+                style={{
+                  x: useTransform(mouseX, [-0.5, 0.5], [-20, 20]),
+                  y: useTransform(mouseY, [-0.5, 0.5], [-20, 20])
+                }}
+                className="absolute bottom-12 left-12 right-12 bg-secondary/40 dark:bg-black/40 backdrop-blur-3xl border border-white/10 p-8 rounded-[2.5rem] premium-shadow transition-colors"
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <div className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">Live Performance</div>
+                  <div className="flex gap-1">
+                    {[1,2,3].map(i => <div key={i} className="w-1 h-3 bg-primary/40 rounded-full animate-bounce" style={{ animationDelay: `${i*0.2}s` }} />)}
+                  </div>
+                </div>
+                <div className="font-heading text-2xl font-bold text-white mb-2 italic">The Sunset Afro-Soul Session</div>
+                <div className="text-white/60 text-sm font-light">Featuring Kenya's premier Obsidian artists</div>
+              </motion.div>
+            </motion.div>
+            
+            {/* Ambient Light Layers */}
+            <motion.div 
+              style={{
+                x: useTransform(mouseX, [-0.5, 0.5], [50, -50]),
+                y: useTransform(mouseY, [-0.5, 0.5], [50, -50])
+              }}
+              className="absolute -top-10 -right-10 w-64 h-64 bg-primary/20 blur-[80px] rounded-full -z-10" 
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* CONCIERGE SEARCH BAR - Overlapping the section break for a premium feel */}
+      <motion.div
+        initial={{ opacity: 0, y: 30, x: "-50%" }}
+        animate={{ opacity: 1, y: 0, x: "-50%" }}
+        transition={{ delay: 1, duration: 0.8, ease: "easeOut" }}
+        className="absolute bottom-0 left-1/2 w-full max-w-6xl px-6 z-30 translate-y-1/2"
+      >
+        <div className="bg-white/95 dark:bg-card/80 backdrop-blur-3xl border border-primary/20 dark:border-white/10 p-2 md:p-3 rounded-[2.5rem] md:rounded-full shadow-[0_40px_80px_-15px_rgba(0,0,0,0.3)] dark:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.6)] transition-colors">
+          <div className="grid grid-cols-1 md:grid-cols-4 items-center">
+            
+            <div className="flex items-center gap-4 px-8 py-5 rounded-full hover:bg-primary/5 transition-all group border-b md:border-b-0 md:border-r border-primary/20 dark:border-white/5">
+              <MapPin className="w-5 h-5 text-primary shrink-0 group-hover:scale-110 transition-transform" />
+              <div className="flex-1">
+                <div className="text-[9px] font-black text-primary uppercase tracking-[0.2em] mb-1 opacity-80">Location</div>
+                <Select defaultValue="nairobi">
+                  <SelectTrigger className="border-none bg-transparent p-0 h-auto font-heading font-bold text-lg md:text-xl focus:ring-0 text-foreground dark:text-white transition-colors">
+                    <SelectValue placeholder="Where?" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white/95 dark:bg-background/95 backdrop-blur-xl border-primary/20 dark:border-white/10">
+                    <SelectItem value="nairobi">Nairobi</SelectItem>
+                    <SelectItem value="mombasa">Mombasa</SelectItem>
+                    <SelectItem value="kisumu">Kisumu</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4 px-8 py-5 rounded-full hover:bg-primary/5 transition-all group border-b md:border-b-0 md:border-r border-primary/20 dark:border-white/5">
+              <Music2 className="w-5 h-5 text-primary shrink-0 group-hover:scale-110 transition-transform" />
+              <div className="flex-1">
+                <div className="text-[9px] font-black text-primary uppercase tracking-[0.2em] mb-1 opacity-80">Event Type</div>
+                <Select defaultValue="wedding">
+                  <SelectTrigger className="border-none bg-transparent p-0 h-auto font-heading font-bold text-lg md:text-xl focus:ring-0 text-foreground dark:text-white transition-colors">
+                    <SelectValue placeholder="Vibe?" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white/95 dark:bg-background/95 backdrop-blur-xl border-primary/20 dark:border-white/10">
+                    <SelectItem value="wedding">Wedding Gala</SelectItem>
+                    <SelectItem value="corporate">Corporate Soirée</SelectItem>
+                    <SelectItem value="private">Private Lounge</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4 px-8 py-5 rounded-full hover:bg-primary/5 transition-all group border-b md:border-b-0 border-primary/20 dark:border-white/5">
+              <Calendar className="w-5 h-5 text-primary shrink-0 group-hover:scale-110 transition-transform" />
+              <div className="flex-1">
+                <div className="text-[9px] font-black text-primary uppercase tracking-[0.2em] mb-1 opacity-80">Schedule</div>
+                <Input 
+                  type="date" 
+                  className="border-none bg-transparent p-0 h-auto font-heading font-bold text-lg md:text-xl focus-visible:ring-0 text-secondary dark:text-white cursor-pointer transition-colors"
+                />
+              </div>
+            </div>
+
+            <div className="p-2">
+              <Button className="w-full h-16 md:h-20 rounded-full md:rounded-full bg-primary hover:bg-primary/90 text-white shadow-[0_20px_40px_-10px_rgba(var(--primary),0.4)] transition-all hover:scale-[1.02] active:scale-95 text-lg font-bold gap-3 premium-shadow border-none">
+                <Search className="w-5 h-5" />
+                Find Artist
+              </Button>
+            </div>
+
+          </div>
+        </div>
+      </motion.div>
+    </section>
+  );
+}
+
+function MagneticButton({ children }) {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const springConfig = { damping: 15, stiffness: 150 };
+  const x = useSpring(mouseX, springConfig);
+  const y = useSpring(mouseY, springConfig);
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    mouseX.set((e.clientX - centerX) * 0.3);
+    mouseY.set((e.clientY - centerY) * 0.3);
+  };
+
+  const handleMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+  };
+
+  return (
+    <motion.div
+      style={{ x, y }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      {children}
+    </motion.div>
+  );
+}

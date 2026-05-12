@@ -1,0 +1,23 @@
+{
+  "name": "MusicianProfile",
+  "type": "object",
+  "properties": {
+    "user_email": { "type": "string" },
+    "name": { "type": "string" },
+    "location": { "type": "string" },
+    "bio": { "type": "string" },
+    "experience_years": { "type": "number" },
+    "genre": { "type": "string" },
+    "event_types": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "base_price": { "type": "number" },
+    "photo_url": { "type": "string" },
+    "is_verified": { "type": "boolean", "default": false },
+    "is_active": { "type": "boolean", "default": true },
+    "average_rating": { "type": "number" },
+    "total_bookings": { "type": "number", "default": 0 }
+  },
+  "required": ["name", "location", "genre", "base_price"]
+}
