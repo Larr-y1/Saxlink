@@ -73,7 +73,7 @@ const stats = [
 
 export default function StatsSection() {
   return (
-    <section className="py-24 md:py-48 bg-[#f5f3ff] dark:bg-secondary text-secondary-foreground relative overflow-hidden transition-colors duration-1000">
+    <section className="py-10 md:py-16 bg-[#f5f3ff] dark:bg-secondary text-secondary-foreground relative overflow-hidden transition-colors duration-1000">
       {/* Premium Photographic Background & Illustrations */}
       <div className="absolute inset-0 pointer-events-none">
         <img 

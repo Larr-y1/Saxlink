@@ -1,6 +1,6 @@
 
 import { motion } from 'framer-motion';
-import { Twitter, Instagram, Mail, Phone, ArrowUp, ShieldCheck, Globe, CreditCard, Loader2 } from 'lucide-react';
+import { Twitter, Instagram, ArrowUp, ShieldCheck, Globe, CreditCard, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Logo from '../common/Logo';
 
@@ -17,18 +17,18 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#faf9ff] dark:bg-background border-t border-primary/10 dark:border-white/5 pt-40 pb-20 relative overflow-hidden transition-colors duration-1000">
+    <footer className="bg-[#faf9ff] dark:bg-background border-t border-primary/10 dark:border-white/5 pt-20 pb-12 relative overflow-hidden transition-colors duration-1000">
       {/* Instagram Preview Grid - New Section */}
-      <div className="max-w-[90rem] mx-auto px-6 mb-40">
-        <div className="flex items-center justify-between mb-12">
-          <div className="flex items-center gap-6">
-            <div className="w-16 h-px bg-primary/60" />
-            <span className="text-[11px] font-black text-primary uppercase tracking-[0.7em]">Instagram_Feed // LIVE</span>
+      <div className="max-w-7xl mx-auto px-6 mb-20">
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-px bg-primary/60" />
+            <span className="text-[10px] font-black text-primary uppercase tracking-[0.5em]">Instagram_Feed // LIVE</span>
           </div>
-          <a href="#" className="text-[10px] font-black text-black/60 dark:text-muted-foreground hover:text-primary uppercase tracking-[0.4em] transition-all">Follow @SaxLink_Elite</a>
+          <a href="#" className="text-[9px] font-black text-black/60 dark:text-muted-foreground hover:text-primary uppercase tracking-[0.4em] transition-all">Follow @SaxLink_Elite</a>
         </div>
         
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+        <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
           {[1, 2, 3, 4, 5, 6].map((i) => (
             <div key={i} className="aspect-square rounded-3xl bg-white dark:bg-white/[0.03] border border-primary/10 dark:border-white/5 flex flex-col items-center justify-center gap-4 group hover:border-primary/40 transition-all duration-700 relative overflow-hidden shadow-sm">
               <Loader2 className="w-6 h-6 text-primary/20 animate-spin group-hover:text-primary transition-colors" />
@@ -50,16 +50,16 @@ export default function Footer() {
         </motion.h2>
       </div>
 
-      <div className="max-w-[90rem] mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-24 mb-40">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-16 mb-20">
           
           {/* Brand & Narrative */}
           <div className="lg:col-span-4">
-            <Logo className="mb-12 scale-110 origin-left" />
-            <p className="text-2xl text-black/60 dark:text-muted-foreground font-light leading-relaxed max-w-sm mb-16 italic transition-colors">
+            <Logo className="mb-8 scale-100 origin-left" />
+            <p className="text-xl text-black/60 dark:text-muted-foreground font-light leading-relaxed max-w-sm mb-10 italic transition-colors">
               "Redefining the digital infrastructure of live music through absolute technical precision and world-class artistry."
             </p>
-            <div className="flex gap-6">
+            <div className="flex gap-4">
               {[
                 { Icon: TikTok, href: '#' },
                 { Icon: Instagram, href: '#' },
@@ -68,10 +68,10 @@ export default function Footer() {
                 <motion.a 
                   key={i} 
                   href={href} 
-                  whileHover={{ y: -5 }}
-                  className="w-16 h-16 rounded-3xl bg-white dark:bg-white/[0.03] border border-primary/10 dark:border-white/5 flex items-center justify-center hover:border-primary/40 hover:bg-primary/5 hover:text-primary transition-all duration-500 premium-shadow shadow-sm"
+                  whileHover={{ y: -3 }}
+                  className="w-12 h-12 rounded-2xl bg-white dark:bg-white/[0.03] border border-primary/10 dark:border-white/5 flex items-center justify-center hover:border-primary/40 hover:bg-primary/5 hover:text-primary transition-all duration-500 premium-shadow shadow-sm"
                 >
-                  <Icon className="w-6 h-6" />
+                  <Icon className="w-5 h-5" />
                 </motion.a>
               ))}
             </div>
@@ -79,12 +79,12 @@ export default function Footer() {
 
           {/* Technical Directory: Registry */}
           <div className="lg:col-span-2">
-            <h4 className="text-[11px] font-black text-primary uppercase tracking-[0.5em] mb-12">THE_REGISTRY</h4>
-            <ul className="space-y-8">
+            <h4 className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-8">THE_REGISTRY</h4>
+            <ul className="space-y-4">
               {[
                 { label: 'Browse Artists', href: '/browse' },
-                { label: 'Booking Protocol', href: '/#how-it-works' },
-                { label: 'Verified Venues', href: '/venues' },
+                { label: 'Booking Protocol', href: '/how-it-works' },
+                { label: 'Our Philosophy', href: '/about' },
                 { label: 'Concierge Support', href: '/support' },
               ].map((l) => (
                 <li key={l.label}>
@@ -99,13 +99,13 @@ export default function Footer() {
 
           {/* Technical Directory: The Guild */}
           <div className="lg:col-span-2">
-            <h4 className="text-[11px] font-black text-primary uppercase tracking-[0.5em] mb-12">THE_GUILD</h4>
-            <ul className="space-y-8">
+            <h4 className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-8">THE_GUILD</h4>
+            <ul className="space-y-4">
               {[
                 { label: 'Residency Application', href: '/register' },
-                { label: 'Artist Console', href: '/dashboard' },
-                { label: 'Technical Rider', href: '/riders' },
-                { label: 'Elite Benefits', href: '/benefits' },
+                { label: 'Artist Console', href: '/login' },
+                { label: 'Technical Rider', href: '/how-it-works' },
+                { label: 'Elite Benefits', href: '/pricing' },
               ].map((l) => (
                 <li key={l.label}>
                   <Link to={l.href} className="text-base text-black/60 dark:text-muted-foreground hover:text-primary transition-all font-light tracking-tight group flex items-center gap-3">
@@ -119,17 +119,17 @@ export default function Footer() {
 
           {/* The Artisan Brief (Newsletter) */}
           <div className="lg:col-span-4">
-            <h4 className="text-[11px] font-black text-primary uppercase tracking-[0.5em] mb-12">THE_ARTISAN_BRIEF</h4>
-            <p className="text-base text-black/60 dark:text-muted-foreground font-light mb-10 leading-relaxed transition-colors">
+            <h4 className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-8">THE_ARTISAN_BRIEF</h4>
+            <p className="text-sm text-black/60 dark:text-muted-foreground font-light mb-6 leading-relaxed transition-colors">
               Subscribe to our weekly dispatch on high-end performance trends and exclusive venue residencies.
             </p>
-            <div className="relative group p-1 bg-white dark:bg-white/[0.03] border border-primary/10 dark:border-white/10 rounded-[2.5rem] focus-within:border-primary/40 transition-all shadow-sm">
+            <div className="relative group p-1 bg-white dark:bg-white/[0.03] border border-primary/10 dark:border-white/10 rounded-2xl focus-within:border-primary/40 transition-all shadow-sm">
               <input 
                 type="email" 
                 placeholder="signature@email.com" 
-                className="w-full bg-transparent border-none px-8 py-6 text-base font-light focus:outline-none placeholder:text-black/30 dark:placeholder:text-white/20 text-black dark:text-white"
+                className="w-full bg-transparent border-none px-6 py-4 text-sm font-light focus:outline-none placeholder:text-black/30 dark:placeholder:text-white/20 text-black dark:text-white"
               />
-              <button className="absolute right-2 top-2 bottom-2 px-8 bg-primary text-white rounded-[2rem] flex items-center justify-center hover:bg-primary/90 transition-all font-black text-[10px] uppercase tracking-widest border-none">
+              <button className="absolute right-1.5 top-1.5 bottom-1.5 px-6 bg-primary text-white rounded-xl flex items-center justify-center hover:bg-primary/90 transition-all font-black text-[9px] uppercase tracking-widest border-none">
                 Subscribe
               </button>
             </div>
@@ -137,44 +137,44 @@ export default function Footer() {
         </div>
 
         {/* Institutional Trust Badges & Legal */}
-        <div className="pt-20 border-t border-primary/10 dark:border-white/5 flex flex-col lg:flex-row items-center justify-between gap-16">
-          <div className="flex flex-wrap items-center justify-center lg:justify-start gap-16 opacity-30 grayscale hover:grayscale-0 transition-all duration-1000 text-black dark:text-white">
+        <div className="pt-12 border-t border-primary/10 dark:border-white/5 flex flex-col lg:flex-row items-center justify-between gap-10">
+          <div className="flex flex-wrap items-center justify-center lg:justify-start gap-10 opacity-30 grayscale hover:grayscale-0 transition-all duration-1000 text-black dark:text-white">
             <div className="flex items-center gap-4">
-              <ShieldCheck className="w-6 h-6" />
-              <span className="text-[10px] font-black uppercase tracking-[0.3em]">Institutional Grade</span>
+              <ShieldCheck className="w-5 h-5" />
+              <span className="text-[9px] font-black uppercase tracking-[0.3em]">Institutional Grade</span>
             </div>
             <div className="flex items-center gap-4">
-              <CreditCard className="w-6 h-6" />
-              <span className="text-[10px] font-black uppercase tracking-[0.3em]">Verified Payouts</span>
+              <CreditCard className="w-5 h-5" />
+              <span className="text-[9px] font-black uppercase tracking-[0.3em]">Verified Payouts</span>
             </div>
             <div className="flex items-center gap-4">
-              <Globe className="w-6 h-6" />
-              <span className="text-[10px] font-black uppercase tracking-[0.3em]">Regional Presence</span>
+              <Globe className="w-5 h-5" />
+              <span className="text-[9px] font-black uppercase tracking-[0.3em]">Regional Presence</span>
             </div>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-x-12 gap-y-6">
+          <div className="flex flex-wrap justify-center gap-x-8 gap-y-4">
             {[
               { label: 'Terms of Service', href: '/terms' },
               { label: 'Cookie Policy', href: '/cookies' },
               { label: 'Privacy Policy', href: '/privacy' }
             ].map((l) => (
-              <Link key={l.label} to={l.href} className="text-[11px] font-black text-black/60 dark:text-muted-foreground hover:text-primary uppercase tracking-[0.3em] transition-colors">{l.label}</Link>
+              <Link key={l.label} to={l.href} className="text-[10px] font-black text-black/60 dark:text-muted-foreground hover:text-primary uppercase tracking-[0.2em] transition-colors">{l.label}</Link>
             ))}
           </div>
         </div>
 
         {/* Closing Signature */}
-        <div className="mt-24 pt-16 border-t border-primary/10 dark:border-white/5 flex flex-col md:flex-row items-center justify-between gap-10">
-          <p className="text-[11px] font-black text-black/10 dark:text-white/10 uppercase tracking-[0.4em] transition-colors">
+        <div className="mt-16 pt-10 border-t border-primary/10 dark:border-white/5 flex flex-col md:flex-row items-center justify-between gap-8">
+          <p className="text-[10px] font-black text-black/10 dark:text-white/10 uppercase tracking-[0.3em] transition-colors">
             © 2026 SaxLink Technologies · Handcrafted for the Global Stage.
           </p>
           
           <button 
             onClick={scrollToTop}
-            className="group flex items-center gap-5 text-[11px] font-black text-primary uppercase tracking-[0.5em] hover:text-black dark:hover:text-white transition-all"
+            className="group flex items-center gap-3 text-[10px] font-black text-primary uppercase tracking-[0.4em] hover:text-black dark:hover:text-white transition-all"
           >
-            Ascend to Top <ArrowUp className="w-5 h-5 group-hover:-translate-y-2 transition-transform" />
+            Ascend to Top <ArrowUp className="w-4 h-4 group-hover:-translate-y-1 transition-transform" />
           </button>
         </div>
       </div>

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { BarChart3, Bell, Calendar, Wallet, User, Search, CheckCircle2, ArrowRight } from 'lucide-react';
+import { BarChart3, Calendar, Wallet, User, CheckCircle2, ArrowRight as LucideArrowRight } from 'lucide-react';
 
 const artistBookings = [
   { venue: 'Tribe Hotel – Lounge Night', date: 'Fri 25 Apr · 7:00 PM', status: 'Accepted', color: 'text-emerald-600 dark:text-emerald-400 bg-emerald-400/10 border-emerald-400/20' },
@@ -40,12 +40,12 @@ export default function DashboardPreview() {
   };
 
   return (
-    <section className="py-32 md:py-64 bg-[#f8f7ff] dark:bg-background relative overflow-hidden transition-colors duration-1000">
+    <section className="py-10 md:py-16 bg-[#f8f7ff] dark:bg-background relative overflow-hidden transition-colors duration-1000">
       {/* Cinematic Lighting */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] bg-primary/5 blur-[220px] rounded-full" />
       
-      <div className="max-w-[90rem] mx-auto px-6 relative z-10">
-        <div className="text-center mb-40">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-12">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -53,7 +53,7 @@ export default function DashboardPreview() {
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           >
             <span className="text-[11px] font-black text-primary uppercase tracking-[0.6em] mb-10 block">The Technical Ledger</span>
-            <h2 className="font-heading text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter mb-16 leading-[0.8] text-black dark:text-white">
+            <h2 className="font-heading text-4xl md:text-8xl lg:text-9xl font-black tracking-tighter mb-16 leading-[0.8] text-black dark:text-white">
               A Private Suite for <br />
               <span className="italic font-light text-primary/80">Virtuosos.</span>
             </h2>
@@ -89,9 +89,9 @@ export default function DashboardPreview() {
             className="max-w-6xl mx-auto relative"
           >
             {/* Main Window */}
-            <div className="bg-white/60 dark:bg-white/[0.03] backdrop-blur-3xl border border-primary/10 dark:border-white/10 rounded-[4rem] overflow-hidden premium-shadow-lg relative z-10">
+            <div className="bg-white/60 dark:bg-white/[0.03] backdrop-blur-3xl border border-primary/10 dark:border-white/10 rounded-[2rem] md:rounded-[4rem] overflow-hidden premium-shadow-lg relative z-10">
               {/* Toolbar */}
-              <div className="px-12 py-8 border-b border-primary/5 dark:border-white/5 flex items-center justify-between bg-secondary/[0.02] dark:bg-white/[0.02]">
+              <div className="px-6 md:px-12 py-8 border-b border-primary/5 dark:border-white/5 flex items-center justify-between bg-secondary/[0.02] dark:bg-white/[0.02]">
                 <div className="flex items-center gap-8">
                   <div className="flex gap-2.5">
                     <div className="w-3.5 h-3.5 rounded-full bg-red-500/20 border border-red-500/10" />
@@ -113,11 +113,11 @@ export default function DashboardPreview() {
                 </div>
               </div>
 
-              <div className="p-12 md:p-20">
-                <div className="grid md:grid-cols-12 gap-20">
+              <div className="p-6 md:p-12 lg:p-20">
+                <div className="grid md:grid-cols-12 gap-10 md:gap-20">
                   {/* Left Column: Stats & Profile */}
                   <div className="md:col-span-4 space-y-12">
-                    <div className="p-10 rounded-[3rem] bg-secondary/[0.03] dark:bg-white/[0.03] border border-primary/10 dark:border-white/10 relative overflow-hidden group shadow-2xl">
+                    <div className="p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] bg-secondary/[0.03] dark:bg-white/[0.03] border border-primary/10 dark:border-white/10 relative overflow-hidden group shadow-2xl">
                       <div className="relative z-10">
                         <p className="text-[11px] font-black text-primary uppercase tracking-[0.4em] mb-6">
                           {view === 'artist' ? 'Portfolio Resonance' : 'Institutional Investment'}
@@ -160,29 +160,37 @@ export default function DashboardPreview() {
 
                     <div className="space-y-8">
                       <AnimatePresence mode="wait">
-                        {(view === 'artist' ? artistBookings : clientBookings).map((b, i) => (
-                          <motion.div 
-                            key={b.venue}
-                            initial={{ opacity: 0, x: 30 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -30 }}
-                            transition={{ delay: i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                            className="flex items-center justify-between p-10 rounded-[3rem] bg-secondary/[0.02] dark:bg-white/[0.02] border border-primary/5 dark:border-white/5 hover:border-primary/40 transition-all duration-1000 group shadow-lg"
-                          >
-                            <div className="flex items-center gap-10">
-                              <div className="w-16 h-16 rounded-[1.5rem] bg-secondary/5 dark:bg-white/5 border border-primary/10 dark:border-white/10 flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-700 shadow-inner">
-                                <Calendar className="w-7 h-7" />
+                        <motion.div 
+                          key={view}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.5 }}
+                          className="space-y-8"
+                        >
+                          {(view === 'artist' ? artistBookings : clientBookings).map((b, i) => (
+                              <motion.div 
+                                key={b.venue}
+                                initial={{ opacity: 0, x: 30 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                                className="flex items-center justify-between p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] bg-secondary/[0.02] dark:bg-white/[0.02] border border-primary/5 dark:border-white/5 hover:border-primary/40 transition-all duration-1000 group shadow-lg"
+                              >
+                              <div className="flex items-center gap-10">
+                                <div className="w-16 h-16 rounded-[1.5rem] bg-secondary/5 dark:bg-white/5 border border-primary/10 dark:border-white/10 flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-700 shadow-inner">
+                                  <Calendar className="w-7 h-7" />
+                                </div>
+                                <div>
+                                  <p className="text-xl font-bold text-black dark:text-white tracking-tight mb-2 group-hover:text-primary transition-colors">{b.venue}</p>
+                                  <p className="text-[11px] text-black/40 dark:text-white/30 uppercase tracking-[0.3em] font-black">{b.date}</p>
+                                </div>
                               </div>
-                              <div>
-                                <p className="text-xl font-bold text-black dark:text-white tracking-tight mb-2 group-hover:text-primary transition-colors">{b.venue}</p>
-                                <p className="text-[11px] text-black/40 dark:text-white/30 uppercase tracking-[0.3em] font-black">{b.date}</p>
+                              <div className={`text-[10px] font-black px-6 py-3 rounded-full uppercase tracking-[0.3em] border ${b.color} shadow-sm`}>
+                                {b.status}
                               </div>
-                            </div>
-                            <div className={`text-[10px] font-black px-6 py-3 rounded-full uppercase tracking-[0.3em] border ${b.color} shadow-sm`}>
-                              {b.status}
-                            </div>
-                          </motion.div>
-                        ))}
+                            </motion.div>
+                          ))}
+                        </motion.div>
                       </AnimatePresence>
                     </div>
                   </div>
@@ -216,11 +224,11 @@ export default function DashboardPreview() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="mt-40 text-center"
+          className="mt-12 text-center"
         >
           <Link to="/register">
             <Button variant="ghost" className="rounded-full px-16 py-10 text-[12px] font-black uppercase tracking-[0.4em] gap-6 border border-primary/10 dark:border-white/10 hover:bg-primary hover:text-white hover:border-primary transition-all duration-1000 group text-black dark:text-white">
-              Experience the Full Suite <ArrowRight className="w-5 h-5 group-hover:translate-x-3 transition-transform duration-500" />
+              Experience the Full Suite <LucideArrowRight className="w-5 h-5 group-hover:translate-x-3 transition-transform duration-500" />
             </Button>
           </Link>
         </motion.div>

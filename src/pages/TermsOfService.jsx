@@ -2,14 +2,14 @@ import { motion } from 'framer-motion';
 
 export default function TermsOfService() {
   return (
-    <div className="min-h-screen bg-white dark:bg-background relative overflow-hidden transition-colors duration-1000">
+    <div className="min-h-[80vh] bg-white dark:bg-background relative overflow-hidden transition-colors duration-1000">
       {/* THE HYBRID ANCHOR: High-contrast Obsidian block for visual weight */}
       <div className="absolute top-0 left-0 w-full h-[600px] bg-secondary dark:bg-white/[0.02] transition-all duration-1000 z-0" />
       
       {/* Background Lighting */}
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/10 blur-[180px] rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none" />
       
-      <div className="max-w-4xl mx-auto px-6 relative z-10 pt-48 pb-40">
+      <div className="max-w-4xl mx-auto px-6 relative z-10 pt-24 pb-16">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}

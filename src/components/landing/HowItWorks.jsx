@@ -100,7 +100,7 @@ export default function HowItWorks() {
   const [hoveredIdx, setHoveredIdx] = useState(null);
 
   return (
-    <section id="how-it-works" className="py-24 md:py-48 bg-background relative overflow-hidden transition-colors duration-1000">
+    <section id="how-it-works" className="py-10 md:py-16 bg-background relative overflow-hidden transition-colors duration-1000">
       {/* THE HYBRID ANCHOR: A large obsidian block that sits behind the header area in light mode */}
       <div className="absolute top-0 left-0 w-full h-[600px] bg-[#f5f3ff] dark:bg-transparent pointer-events-none transition-colors duration-1000" />
       
@@ -114,8 +114,8 @@ export default function HowItWorks() {
         <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background transition-colors duration-1000" />
       </div>
 
-      <div className="max-w-[90rem] mx-auto px-6 relative z-10">
-        <div className="flex flex-col lg:flex-row gap-24 items-start mb-40">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 relative z-10">
+        <div className="flex flex-col lg:flex-row gap-24 items-start mb-12">
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -134,11 +134,11 @@ export default function HowItWorks() {
               </div>
 
               <span className="text-[11px] font-black text-primary uppercase tracking-[0.6em] mb-8 block">The Artisan's Journey</span>
-              <h2 className="font-heading text-6xl md:text-7xl font-black tracking-tighter leading-[0.9] text-white">
+              <h2 className="font-heading text-6xl md:text-7xl font-black tracking-tighter leading-[0.9] text-black dark:text-white">
                 A Seamless <br />
                 <span className="italic font-light text-primary/80">Rhythmic Flow.</span>
               </h2>
-              <p className="mt-12 text-white/90 font-medium md:font-light leading-relaxed">
+              <p className="mt-12 text-black/80 dark:text-white/90 font-medium md:font-light leading-relaxed">
                 Four phases of performance management, engineered for absolute transparency.
               </p>
             </div>

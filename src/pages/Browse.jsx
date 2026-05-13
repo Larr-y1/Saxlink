@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, SlidersHorizontal, Star, BadgeCheck, MapPin, X, ArrowRight, ChevronDown, Sparkles, Music, Filter, SortAsc } from 'lucide-react';
+import { Search, Star, BadgeCheck, MapPin, ArrowRight as LucideArrowRight, Filter, SortAsc } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -44,7 +44,7 @@ export default function Browse() {
   ].filter(Boolean).length;
 
   return (
-    <div className="min-h-screen bg-white dark:bg-background relative overflow-hidden transition-colors duration-1000 pb-32">
+    <div className="min-h-[80vh] bg-white dark:bg-background relative overflow-hidden transition-colors duration-1000 pb-32">
       {/* THE HYBRID ANCHOR */}
       <div className="absolute top-0 left-0 w-full h-[600px] bg-black dark:bg-white/[0.02] transition-all duration-1000 z-0" />
       
@@ -52,9 +52,9 @@ export default function Browse() {
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/10 blur-[180px] rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
       {/* Header Section */}
-      <div className="pt-48 relative z-10">
-        <div className="max-w-[90rem] mx-auto px-6">
-          <div className="flex flex-col md:flex-row items-end justify-between gap-12 mb-20">
+      <div className="pt-24 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-end justify-between gap-12 mb-12">
             <motion.div
               initial={{ opacity: 0, x: -40 }}
               animate={{ opacity: 1, x: 0 }}
@@ -82,8 +82,8 @@ export default function Browse() {
               className="hidden lg:block w-64 h-64 opacity-20"
             >
               <svg viewBox="0 0 100 100" className="w-full h-full text-primary" fill="none" stroke="currentColor" strokeWidth="1">
-                <motion.circle cx="50" cy="50" r="40" animate={{ strokeDasharray: ["0 100", "100 100"] }} transition={{ duration: 2, repeat: Infinity }} />
-                <motion.path d="M30 50 Q50 20 70 50 T100 50" animate={{ pathLength: [0, 1] }} transition={{ duration: 1.5, repeat: Infinity }} />
+                <motion.circle cx="50" cy="50" r="40" initial={{ strokeDasharray: "0 100" }} animate={{ strokeDasharray: "100 100" }} transition={{ duration: 2, repeat: Infinity }} />
+                <motion.path d="M30 50 Q50 20 70 50 T100 50" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.5, repeat: Infinity }} />
               </svg>
             </motion.div>
           </div>
@@ -151,7 +151,7 @@ export default function Browse() {
                   exit={{ opacity: 0, y: -20 }}
                   className="absolute top-full left-0 w-full z-20"
                 >
-                  <div className="bg-white/95 dark:bg-background/95 backdrop-blur-3xl border border-primary/10 dark:border-white/10 rounded-[3rem] p-12 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.2)] grid sm:grid-cols-2 lg:grid-cols-4 gap-12">
+                  <div className="bg-white/95 dark:bg-background/95 backdrop-blur-3xl border border-primary/10 dark:border-white/10 rounded-[2rem] p-6 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.2)] grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     <FilterGroup label="Institutional Region">
                       <Select value={location} onValueChange={setLocation}>
                         <SelectTrigger className="rounded-2xl border-primary/10 dark:border-white/10 bg-secondary/5 dark:bg-white/5 h-16 text-[10px] font-black uppercase tracking-widest px-6">
@@ -207,13 +207,13 @@ export default function Browse() {
         </div>
       </div>
 
-      <div className="max-w-[90rem] mx-auto px-6 py-40">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-12">
         {/* Musician Grid */}
         {filtered.length === 0 ? (
           <motion.div 
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center py-64 bg-secondary/5 dark:bg-white/[0.02] rounded-[4rem] border border-dashed border-primary/20 dark:border-white/10"
+            className="text-center py-32 bg-secondary/5 dark:bg-white/[0.02] rounded-[2.5rem] border border-dashed border-primary/20 dark:border-white/10"
           >
             <div className="max-w-md mx-auto px-6">
               <div className="w-24 h-24 bg-primary/10 rounded-[2rem] flex items-center justify-center mx-auto mb-10 shadow-inner">
@@ -231,7 +231,7 @@ export default function Browse() {
             </div>
           </motion.div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             <AnimatePresence mode="popLayout">
               {filtered.map((m, idx) => (
                 <motion.div
@@ -243,58 +243,58 @@ export default function Browse() {
                   transition={{ duration: 1, delay: idx * 0.05, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <Link to={`/musician/${m.id}`} className="group block h-full">
-                    <div className="relative bg-[#faf9ff] dark:bg-white/[0.02] border border-primary/10 dark:border-white/10 rounded-[4rem] overflow-hidden transition-all duration-1000 premium-shadow group-hover:border-primary/40 group-hover:-translate-y-4 group-hover:shadow-[0_50px_100px_-20px_rgba(var(--primary),0.1)]">
+                    <div className="relative bg-[#faf9ff] dark:bg-white/[0.02] border border-primary/10 dark:border-white/10 rounded-[2.5rem] overflow-hidden transition-all duration-1000 premium-shadow group-hover:border-primary/40 group-hover:-translate-y-2 group-hover:shadow-[0_40px_80px_-20px_rgba(var(--primary),0.1)]">
                       
                       {/* Artistic Portrait Container */}
                       <div className="relative aspect-[4/5] overflow-hidden">
                         <img 
                           src={m.img} 
                           alt={m.name} 
-                          className="w-full h-full object-cover grayscale-[0.3] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-[2.5s] ease-out" 
+                          className="w-full h-full object-cover grayscale-[0.3] group-hover:grayscale-0 group-hover:scale-110 transition-all [transition-duration:2.5s] ease-out" 
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-1000" />
                         
-                        <div className="absolute top-8 left-8">
-                          <Badge className="bg-black/60 backdrop-blur-3xl border-white/10 text-white text-[9px] font-black uppercase tracking-[0.3em] gap-3 py-3 px-6 rounded-2xl">
-                            <BadgeCheck className="w-4 h-4 text-primary" /> Verified
+                        <div className="absolute top-6 left-6">
+                          <Badge className="bg-black/60 backdrop-blur-3xl border-white/10 text-white text-[8px] font-black uppercase tracking-[0.2em] gap-2 py-2 px-4 rounded-xl">
+                            <BadgeCheck className="w-3 h-3 text-primary" /> Verified
                           </Badge>
                         </div>
                         
-                        <div className="absolute top-8 right-8 bg-white/10 backdrop-blur-3xl rounded-2xl px-5 py-3 flex items-center gap-3 border border-white/10">
-                          <Star className="w-4 h-4 fill-primary text-primary" />
-                          <span className="text-white text-[11px] font-black">{m.rating}</span>
+                        <div className="absolute top-6 right-6 bg-white/10 backdrop-blur-3xl rounded-xl px-4 py-2 flex items-center gap-2 border border-white/10">
+                          <Star className="w-3 h-3 fill-primary text-primary" />
+                          <span className="text-white text-[10px] font-black">{m.rating}</span>
                         </div>
 
                         {/* Hover Overlay Icon */}
                         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-                          <div className="w-20 h-20 rounded-full bg-primary/90 text-white flex items-center justify-center shadow-2xl scale-50 group-hover:scale-100 transition-transform duration-1000 ease-out">
-                            <ArrowRight className="w-10 h-10" />
+                          <div className="w-16 h-16 rounded-full bg-primary/90 text-white flex items-center justify-center shadow-2xl scale-50 group-hover:scale-100 transition-transform duration-1000 ease-out">
+                            <LucideArrowRight className="w-8 h-8" />
                           </div>
                         </div>
                       </div>
 
-                      <div className="p-12">
-                        <div className="flex justify-between items-start mb-4">
-                          <h3 className="font-heading text-3xl font-black text-black dark:text-white tracking-tighter group-hover:text-primary transition-colors duration-700">{m.name}</h3>
+                      <div className="p-6">
+                        <div className="flex justify-between items-start mb-2">
+                          <h3 className="font-heading text-2xl font-black text-black dark:text-white tracking-tighter group-hover:text-primary transition-colors duration-700">{m.name}</h3>
                         </div>
                         
-                        <div className="flex items-center gap-4 text-[11px] font-black text-gray-900 dark:text-white/40 uppercase tracking-[0.3em] mb-10 transition-colors">
-                          <MapPin className="w-4 h-4 text-primary" />
+                        <div className="flex items-center gap-3 text-[10px] font-black text-gray-900 dark:text-white/40 uppercase tracking-[0.2em] mb-6 transition-colors">
+                          <MapPin className="w-3 h-3 text-primary" />
                           {m.location}
                         </div>
 
-                        <div className="flex flex-wrap gap-3 mb-12">
+                        <div className="flex flex-wrap gap-2 mb-8">
                           {m.tags.slice(0, 2).map((t) => (
-                            <span key={t} className="text-[9px] font-black uppercase tracking-[0.3em] bg-primary/10 dark:bg-white/5 border border-primary/20 dark:border-white/10 text-primary px-4 py-2 rounded-xl">
+                            <span key={t} className="text-[8px] font-black uppercase tracking-[0.2em] bg-primary/10 dark:bg-white/5 border border-primary/20 dark:border-white/10 text-primary px-3 py-1.5 rounded-lg">
                               {t}
                             </span>
                           ))}
                         </div>
 
-                        <div className="pt-10 border-t border-primary/10 dark:border-white/5 flex items-end justify-between">
+                        <div className="pt-6 border-t border-primary/10 dark:border-white/5 flex items-end justify-between">
                           <div>
-                            <p className="text-[10px] font-black text-gray-700 dark:text-white/20 uppercase tracking-[0.5em] mb-2 transition-colors">Honorarium_Starting</p>
-                            <span className="text-3xl font-heading font-black text-black dark:text-white group-hover:text-primary transition-colors duration-700">
+                            <p className="text-[9px] font-black text-gray-700 dark:text-white/20 uppercase tracking-[0.4em] mb-1.5 transition-colors">Honorarium_Starting</p>
+                            <span className="text-2xl font-heading font-black text-black dark:text-white group-hover:text-primary transition-colors duration-700">
                               KES {m.price.toLocaleString()}
                             </span>
                           </div>

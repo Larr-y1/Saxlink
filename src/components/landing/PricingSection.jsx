@@ -1,6 +1,6 @@
 
 import { motion } from 'framer-motion';
-import { Check, ArrowRight, Wallet, ShieldCheck, Zap, Minus } from 'lucide-react';
+import { Check, ArrowRight, ShieldCheck, Zap, Minus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
@@ -37,14 +37,14 @@ const residencies = [
 
 export default function PricingSection() {
   return (
-    <section id="pricing" className="py-32 md:py-64 bg-[#faf9ff] dark:bg-background relative overflow-hidden transition-colors duration-1000">
+    <section id="pricing" className="py-10 md:py-16 bg-[#faf9ff] dark:bg-background relative overflow-hidden transition-colors duration-1000">
       {/* THE HYBRID ANCHOR: Large Obsidian block on the left side */}
       <div className="absolute top-0 left-0 w-full lg:w-[45%] h-full bg-[#0a0a0c] dark:bg-transparent transition-colors duration-1000 z-0" />
       
       {/* Background Lighting */}
       <div className="absolute top-1/2 left-0 w-[1000px] h-[1000px] bg-primary/5 blur-[200px] rounded-full -translate-x-1/2 -translate-y-1/2" />
       
-      <div className="max-w-[90rem] mx-auto px-6 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-12 gap-24 lg:gap-32 items-start">
           
           {/* Left Side: Editorial Context (Inside Obsidian Anchor) */}
@@ -59,7 +59,7 @@ export default function PricingSection() {
               <div className="w-16 h-px bg-primary/60" />
               <span className="text-[11px] font-black text-primary uppercase tracking-[0.7em]">The Financial Framework</span>
             </div>
-            <h2 className="font-heading text-6xl md:text-8xl lg:text-9xl font-black text-white tracking-tighter leading-[0.8] mb-12">
+            <h2 className="font-heading text-4xl md:text-8xl lg:text-9xl font-black text-white tracking-tighter leading-[0.8] mb-12">
               Absolute <br />
               <span className="italic font-light text-primary/80">Transparency.</span>
             </h2>
@@ -68,7 +68,7 @@ export default function PricingSection() {
             </p>
 
             {/* The Ledger Breakdown Visual */}
-            <div className="bg-white/[0.03] backdrop-blur-3xl border border-white/10 rounded-[3rem] p-12 premium-shadow shadow-2xl relative overflow-hidden group">
+            <div className="bg-white/[0.03] backdrop-blur-3xl border border-white/10 rounded-[2rem] md:rounded-[3rem] p-6 md:p-12 premium-shadow shadow-2xl relative overflow-hidden group">
               <div className="absolute top-0 right-0 p-8">
                 <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               </div>
@@ -107,7 +107,7 @@ export default function PricingSection() {
                 transition={{ duration: 1, delay: i * 0.2, ease: [0.16, 1, 0.3, 1] }}
                 className="group relative"
               >
-                <div className={`relative h-full bg-white dark:bg-white/[0.03] backdrop-blur-3xl border rounded-[3rem] p-10 md:p-14 overflow-hidden transition-all duration-1000 premium-shadow flex flex-col shadow-2xl ${r.featured ? 'border-primary/40' : 'border-primary/10 dark:border-white/10 hover:border-primary/30'}`}>
+                <div className={`relative h-full bg-white dark:bg-white/[0.03] backdrop-blur-3xl border rounded-[2rem] md:rounded-[3rem] p-6 md:p-14 overflow-hidden transition-all duration-1000 premium-shadow flex flex-col shadow-2xl ${r.featured ? 'border-primary/40' : 'border-primary/10 dark:border-white/10 hover:border-primary/30'}`}>
                   
                   {r.featured && (
                     <div className="absolute top-10 right-10">
@@ -118,7 +118,7 @@ export default function PricingSection() {
                   <div className="mb-12">
                     <h3 className="text-[10px] font-black text-primary uppercase tracking-[0.5em] mb-8">{r.type}</h3>
                     <div className="flex items-baseline gap-3 mb-6">
-                      <span className="font-mono text-6xl md:text-7xl font-black text-foreground dark:text-white tracking-tighter transition-colors">{r.price}</span>
+                      <span className="font-mono text-4xl md:text-7xl font-black text-foreground dark:text-white tracking-tighter transition-colors">{r.price}</span>
                       {r.priceDetail && <span className="text-[9px] font-black text-foreground dark:text-white/40 uppercase tracking-[0.4em] mb-2 transition-colors">{r.priceDetail}</span>}
                     </div>
                     <p className="text-base text-foreground dark:text-white/60 font-medium md:font-light leading-relaxed italic transition-colors">"{r.desc}"</p>

@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, HelpCircle, MessageSquare, ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
+import { ChevronDown } from 'lucide-react';
 
 const faqs = [
   {
@@ -41,15 +39,15 @@ export default function FaqSection() {
   const [open, setOpen] = useState(null);
 
   return (
-    <section className="py-32 md:py-64 bg-white dark:bg-background relative overflow-hidden transition-colors duration-1000">
+    <section className="py-10 md:py-16 bg-white dark:bg-background relative overflow-hidden transition-colors duration-1000">
       {/* THE HYBRID ANCHOR: Large Obsidian block at the top */}
       <div className="absolute top-0 left-0 w-full h-[600px] bg-[#f5f3ff] dark:bg-transparent transition-colors duration-1000 z-0" />
       
       {/* Background Lighting */}
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 blur-[180px] rounded-full translate-x-1/2 -translate-y-1/2" />
       
-      <div className="max-w-[90rem] mx-auto px-6 relative z-10">
-        <div className="flex flex-col items-center text-center mb-40">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 relative z-10">
+        <div className="flex flex-col items-center text-center mb-12">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

@@ -1,13 +1,13 @@
 import { useState, useRef, forwardRef } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { Star, BadgeCheck, MapPin, ArrowRight, Play, Music2, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Star, BadgeCheck, MapPin, ArrowRight as LucideArrowRight, Play, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { MUSICIANS } from '@/lib/musicians-data';
 
 const genres = ['All', 'Jazz', 'Classical', 'Afrobeat', 'Neo-Soul', 'Bossa Nova'];
 
-const ArtistCard = forwardRef(({ artist, idx }, ref) => {
+const ArtistCard = forwardRef(({ artist }, ref) => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -148,12 +148,12 @@ export default function FeaturedMusicians() {
     : MUSICIANS.filter((m) => m.genre.toLowerCase().includes(activeGenre.toLowerCase()));
 
   return (
-    <section id="musicians" className="py-24 md:py-48 bg-background relative overflow-hidden transition-colors duration-1000">
+    <section id="musicians" className="py-10 md:py-16 bg-background relative overflow-hidden transition-colors duration-1000">
       {/* THE HYBRID ANCHOR */}
       <div className="absolute top-0 left-0 w-full h-[700px] bg-[#f8f7ff] dark:bg-transparent pointer-events-none transition-colors duration-1000" />
       
-      <div className="max-w-[90rem] mx-auto px-6 relative z-10">
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-16 mb-32">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 relative z-10">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-16 mb-12">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -221,9 +221,17 @@ export default function FeaturedMusicians() {
           >
             <AnimatePresence mode="popLayout">
               {filtered.map((m, idx) => (
-                <div key={m.id} className="snap-center">
-                  <ArtistCard artist={m} idx={idx} />
-                </div>
+                <motion.div 
+                  key={m.id} 
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.5 }}
+                  className="snap-center"
+                >
+                  <ArtistCard artist={m} />
+                </motion.div>
               ))}
             </AnimatePresence>
           </div>
@@ -238,7 +246,7 @@ export default function FeaturedMusicians() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.5 }}
-          className="mt-32 flex flex-col items-center"
+          className="mt-12 flex flex-col items-center"
         >
           <div className="mb-12 flex -space-x-4">
             {MUSICIANS.slice(0, 6).map((m) => (
@@ -247,14 +255,14 @@ export default function FeaturedMusicians() {
               </div>
             ))}
             <div className="w-16 h-16 rounded-full border-4 border-white dark:border-background bg-primary flex items-center justify-center text-white text-xs font-bold shadow-2xl transition-colors">
-              +42
+              +{MUSICIANS.length - 6}
             </div>
           </div>
           
           <Link to="/browse">
             <Button className="group relative overflow-hidden bg-secondary text-white dark:bg-white dark:text-black rounded-full px-16 py-10 text-[11px] font-black uppercase tracking-[0.3em] hover:scale-105 transition-all duration-700 shadow-2xl">
               <span className="relative z-10 flex items-center gap-4 text-black dark:text-black">
-                Enter The Artist Registry <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                Enter The Artist Registry <LucideArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
               </span>
               <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
             </Button>

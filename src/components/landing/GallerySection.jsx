@@ -1,16 +1,17 @@
 
 
 import { motion } from 'framer-motion';
-import { Play, Music2, Maximize2 } from 'lucide-react';
+import { Play, Maximize2 } from 'lucide-react';
 
 const galleryItems = [
   { 
     id: 'SESSION_01',
-    src: 'https://images.unsplash.com/photo-1514525253344-99a429996593?auto=format&fit=crop&q=80&w=1200', 
+    src: 'https://res.cloudinary.com/my-law-firm/video/upload/v1778705140/My_favorite_gig_Turning_milestone_moments_into_unforgettable_memories_with_a_custom_saxophone_su_pzdabb.mp4', 
     title: 'Midnight Jazz Residency',
     venue: 'TRIBE HOTEL',
     vibe: 'SOPHISTICATED // DEEP SOUL',
-    isLarge: true 
+    isLarge: true,
+    isVideo: true
   },
   { 
     id: 'SESSION_02',
@@ -36,18 +37,19 @@ const galleryItems = [
   },
   { 
     id: 'SESSION_05',
-    src: 'https://images.unsplash.com/photo-1525926477800-7a3b40add5a5?auto=format&fit=crop&q=80&w=800', 
+    src: 'https://res.cloudinary.com/my-law-firm/video/upload/v1778704875/Good_times_jammin_alongside_davidstephenkoz_geraldalbright_richardelliotmusic_mindiabair_g_tso2kx.mp4', 
     title: 'Acoustic Solo Session',
     venue: 'SANKARA ROOFTOP',
-    vibe: 'INTIMATE // NEO-SOUL'
+    vibe: 'INTIMATE // NEO-SOUL',
+    isVideo: true
   },
 ];
 
 export default function GallerySection() {
   return (
-    <section className="py-32 md:py-64 bg-[#fcfaff] dark:bg-secondary text-secondary-foreground relative overflow-hidden transition-colors duration-1000">
-      <div className="max-w-[90rem] mx-auto px-6 relative z-10">
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-16 mb-40">
+    <section className="py-10 md:py-16 bg-[#fcfaff] dark:bg-secondary text-secondary-foreground relative overflow-hidden transition-colors duration-1000">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 relative z-10">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-16 mb-8 md:mb-12">
           <motion.div
             initial={{ opacity: 0, x: -60 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -55,11 +57,11 @@ export default function GallerySection() {
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-4xl"
           >
-            <div className="flex items-center gap-6 mb-12">
+            <div className="flex items-center gap-6 mb-8 md:mb-12">
               <div className="w-16 h-px bg-primary/60" />
-              <span className="text-[11px] font-black text-primary uppercase tracking-[0.7em]">The Visual Repertoire</span>
+              <span className="text-[10px] md:text-[11px] font-black text-primary uppercase tracking-[0.7em]">The Visual Repertoire</span>
             </div>
-            <h2 className="font-heading text-6xl md:text-8xl lg:text-9xl font-black text-black dark:text-white tracking-tighter leading-[0.8] mb-12 transition-colors">
+            <h2 className="font-heading text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-black dark:text-white tracking-tighter leading-[0.9] md:leading-[0.8] mb-8 md:mb-12 transition-colors">
               Moments of Pure <br />
               <span className="italic font-light text-primary/80">Resonance.</span>
             </h2>
@@ -70,13 +72,13 @@ export default function GallerySection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.3 }}
-            className="text-2xl text-black/60 dark:text-white/40 font-medium md:font-light leading-relaxed max-w-sm italic transition-colors"
+            className="text-xl md:text-2xl text-black/60 dark:text-white/40 font-medium md:font-light leading-relaxed max-w-sm italic transition-colors"
           >
             "Capturing the atmosphere where world-class talent meets Kenya's most prestigious stages."
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 auto-rows-[400px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10 auto-rows-[400px]">
           {galleryItems.map((item, i) => (
             <motion.div 
               key={i} 
@@ -84,18 +86,29 @@ export default function GallerySection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className={`group relative rounded-[4rem] overflow-hidden border border-white/5 premium-shadow hover:border-primary/40 transition-all duration-1000 ${
-                item.isLarge ? 'md:col-span-2 md:row-span-2' : 
-                item.isWide ? 'md:col-span-2' : ''
+              className={`group relative rounded-[2.5rem] md:rounded-[4rem] overflow-hidden border border-white/5 premium-shadow hover:border-primary/40 transition-all duration-1000 ${
+                item.isLarge ? 'sm:col-span-2 sm:row-span-2' : 
+                item.isWide ? 'sm:col-span-2' : ''
               }`}
             >
-              {/* Image with Magnetic Focus Effect */}
+              {/* Media with Magnetic Focus Effect */}
               <div className="absolute inset-0 z-0">
-                <img 
-                  src={item.src} 
-                  alt={item.title} 
-                  className="w-full h-full object-cover grayscale-[0.5] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-[3s] ease-out" 
-                />
+                {item.isVideo ? (
+                  <video
+                    src={item.src}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="w-full h-full object-cover grayscale-[0.5] group-hover:grayscale-0 group-hover:scale-110 transition-all [transition-duration:3s] ease-out"
+                  />
+                ) : (
+                  <img 
+                    src={item.src} 
+                    alt={item.title} 
+                    className="w-full h-full object-cover grayscale-[0.5] group-hover:grayscale-0 group-hover:scale-110 transition-all [transition-duration:3s] ease-out" 
+                  />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-1000" />
               </div>
 

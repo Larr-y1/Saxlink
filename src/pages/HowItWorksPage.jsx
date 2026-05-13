@@ -1,6 +1,6 @@
 
-import { motion, AnimatePresence } from 'framer-motion';
-import { Search, User, CalendarCheck, Shield, CheckCircle, ArrowRight, CheckCircle2, Clock, CreditCard, Bell, Sparkles, Building2, Utensils, GlassWater, Music, Heart, ChevronLeft, ChevronRight, Star } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Shield, ArrowRight as LucideArrowRight, Bell, Sparkles, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import saxBg from '@/assets/sax-detail.png';
@@ -128,17 +128,17 @@ const guarantees = [
 
 export default function HowItWorksPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-background relative overflow-hidden transition-colors duration-1000">
+    <div className="min-h-[80vh] bg-white dark:bg-background relative overflow-hidden transition-colors duration-1000">
       {/* THE HYBRID ANCHOR */}
       <div className="absolute top-0 left-0 w-full h-[600px] bg-black dark:bg-white/[0.02] transition-all duration-1000 z-0" />
       
       {/* Background Lighting */}
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/10 blur-[180px] rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
-      <div className="pt-48 relative z-10">
+      <div className="pt-24 relative z-10">
         {/* Hero */}
-        <section className="py-20 md:py-32">
-          <div className="max-w-[90rem] mx-auto px-6">
+        <section className="py-10 md:py-16">
+          <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
             <div className="flex flex-col md:flex-row items-end justify-between gap-12">
               <motion.div
                 initial={{ opacity: 0, x: -40 }}
@@ -169,9 +169,9 @@ export default function HowItWorksPage() {
         </section>
 
         {/* FOR CLIENTS */}
-        <section className="py-32 md:py-64 bg-[#fcfaff] dark:bg-secondary text-secondary-foreground transition-colors duration-1000">
-          <div className="max-w-[90rem] mx-auto px-6">
-            <div className="flex flex-col lg:flex-row gap-40 items-start mb-40">
+        <section className="py-10 md:py-16 bg-[#fcfaff] dark:bg-secondary text-secondary-foreground transition-colors duration-1000">
+          <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+            <div className="flex flex-col lg:flex-row gap-40 items-start mb-12">
               <motion.div
                 initial={{ opacity: 0, x: -60 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -215,8 +215,8 @@ export default function HowItWorksPage() {
         </section>
 
         {/* FOR MUSICIANS */}
-        <section className="py-32 md:py-64 bg-white dark:bg-background transition-colors duration-1000">
-          <div className="max-w-[90rem] mx-auto px-6">
+        <section className="py-10 md:py-16 bg-white dark:bg-background transition-colors duration-1000">
+          <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
             <div className="flex flex-col lg:flex-row-reverse gap-40 items-start">
               <motion.div
                 initial={{ opacity: 0, x: 60 }}
@@ -328,7 +328,7 @@ export default function HowItWorksPage() {
             <div className="flex flex-wrap justify-center gap-8">
               <Link to="/browse">
                 <Button className="bg-primary text-white rounded-full px-16 py-10 text-[12px] font-black uppercase tracking-[0.4em] hover:scale-105 transition-all duration-700 shadow-2xl">
-                  Browse Musicians <ArrowRight className="w-5 h-5 ml-4" />
+                  Browse Musicians <LucideArrowRight className="w-5 h-5 ml-4" />
                 </Button>
               </Link>
               <Link to="/register">

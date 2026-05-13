@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Star, BadgeCheck, Quote, ChevronRight } from 'lucide-react';
+import { BadgeCheck, Quote, ChevronRight } from 'lucide-react';
 
 const testimonials = [
   {
@@ -70,7 +70,7 @@ export default function Testimonials() {
               <div className="relative h-full bg-white/[0.03] backdrop-blur-3xl border border-white/10 rounded-[4rem] p-12 md:p-16 overflow-hidden hover:border-primary/40 transition-all duration-1000 premium-shadow flex flex-col shadow-2xl">
                 
                 {/* Institutional Seal */}
-                <div className="absolute top-0 right-0 w-48 h-48 -translate-y-12 translate-x-12 opacity-[0.05] group-hover:opacity-100 group-hover:scale-110 transition-all duration-[2s] ease-out">
+                <div className="absolute top-0 right-0 w-48 h-48 -translate-y-12 translate-x-12 opacity-[0.05] group-hover:opacity-100 group-hover:scale-110 transition-all [transition-duration:2s] ease-out">
                   <BadgeCheck className="w-full h-full text-primary" />
                 </div>
 
@@ -117,7 +117,5 @@ export default function Testimonials() {
         </div>
       </div>
     </section>
-  );
-}
   );
 }

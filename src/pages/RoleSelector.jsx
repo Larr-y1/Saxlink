@@ -15,7 +15,7 @@ const RoleSelector = () => {
   };
 
   return (
-    <div className="container mx-auto py-20 px-4 max-w-4xl">
+    <div className="container mx-auto py-10 px-4 max-w-4xl">
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold mb-4">How will you use Saxlink?</h1>
         <p className="text-xl text-muted-foreground">Select your role to personalize your experience</p>

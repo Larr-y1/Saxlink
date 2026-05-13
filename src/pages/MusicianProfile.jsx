@@ -35,12 +35,12 @@ export default function MusicianProfile() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-[80vh] bg-background text-foreground">
       <Navbar />
       
-      <div className="pt-32">
+      <div className="pt-24">
         {/* Breadcrumb & Actions */}
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 py-2 flex items-center justify-between">
           <Link to="/browse" className="group inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors">
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> Back to Browse
           </Link>
@@ -58,7 +58,7 @@ export default function MusicianProfile() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="max-w-7xl mx-auto px-6 pb-24"
+          className="max-w-7xl mx-auto px-6 pb-12"
         >
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Left column */}
@@ -112,6 +112,31 @@ export default function MusicianProfile() {
                   ))}
                 </div>
               </motion.div>
+
+              {/* Performance Gallery */}
+              {musician.performanceVideos && musician.performanceVideos.length > 0 && (
+                <motion.div variants={itemVariants} className="space-y-6">
+                  <h2 className="font-heading text-2xl font-bold text-foreground">Performance Gallery</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {musician.performanceVideos.map((videoUrl, index) => (
+                      <div key={index} className="bg-card border border-border rounded-[2rem] overflow-hidden shadow-lg group">
+                        <div className="aspect-video relative">
+                          <video 
+                            src={videoUrl} 
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                            className="w-full h-full object-cover"
+                          >
+                            Your browser does not support the video tag.
+                          </video>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
 
               {/* Languages & Skills */}
               <motion.div variants={itemVariants} className="grid sm:grid-cols-2 gap-6">
