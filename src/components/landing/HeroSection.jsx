@@ -1,6 +1,7 @@
 
 import { ArrowRight, Music2, Sparkles } from 'lucide-react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import SoundWave from './SoundWave';
 import heroImg from '@/assets/hero-premium.png';
@@ -19,7 +20,7 @@ export default function HeroSection() {
   return (
     <section 
       onMouseMove={handleMouseMove}
-      className="relative min-h-[60vh] lg:min-h-[75vh] flex items-center justify-center overflow-hidden bg-background pt-24 pb-24 lg:pb-32 transition-colors duration-1000"
+      className="relative min-h-[60vh] lg:min-h-[70vh] flex items-center justify-center overflow-hidden bg-background pt-24 pb-12 lg:pb-16 transition-colors duration-1000"
     >
       {/* Background Video / Cinematic Layer */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -32,7 +33,9 @@ export default function HeroSection() {
           muted 
           loop 
           playsInline
-          className="w-full h-full object-cover opacity-50 dark:opacity-60 contrast-110 saturate-100"
+          onMouseEnter={(e) => e.currentTarget.muted = false}
+          onMouseLeave={(e) => e.currentTarget.muted = true}
+          className="w-full h-full object-cover opacity-50 dark:opacity-60 contrast-110 saturate-100 cursor-pointer"
           poster={heroImg}
         >
           <source src="https://assets.mixkit.co/videos/preview/mixkit-saxophonist-playing-in-a-dark-room-41315-large.mp4" type="video/mp4" />
@@ -125,18 +128,22 @@ export default function HeroSection() {
               className="flex flex-wrap justify-center lg:justify-start gap-4 md:gap-6 mt-8 md:mt-12"
             >
               <MagneticButton>
-                <Button className="rounded-full px-6 md:px-10 py-5 md:py-6 text-sm md:text-base bg-primary hover:bg-primary/90 text-white shadow-xl transition-all group overflow-hidden relative border-none">
-                  <span className="relative z-10 flex items-center">
-                    Discover Artists <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-3 group-hover:translate-x-2 transition-transform" />
-                  </span>
-                  <motion.div 
-                    className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500"
-                  />
-                </Button>
+                <Link to="/browse">
+                  <Button className="rounded-full px-6 md:px-10 py-5 md:py-6 text-sm md:text-base bg-primary hover:bg-primary/90 text-white shadow-xl transition-all group overflow-hidden relative border-none">
+                    <span className="relative z-10 flex items-center">
+                      Discover Artists <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-3 group-hover:translate-x-2 transition-transform" />
+                    </span>
+                    <motion.div 
+                      className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500"
+                    />
+                  </Button>
+                </Link>
               </MagneticButton>
-              <Button variant="ghost" className="rounded-full px-6 md:px-10 py-5 md:py-6 text-sm md:text-base hover:bg-secondary/5 dark:hover:bg-white/5 text-foreground dark:text-foreground border border-secondary/10 dark:border-white/10 backdrop-blur-sm transition-all">
-                Join as Musician
-              </Button>
+              <Link to="/for-musicians">
+                <Button variant="ghost" className="rounded-full px-6 md:px-10 py-5 md:py-6 text-sm md:text-base hover:bg-secondary/5 dark:hover:bg-white/5 text-foreground dark:text-foreground border border-secondary/10 dark:border-white/10 backdrop-blur-sm transition-all h-full">
+                  Join as Musician
+                </Button>
+              </Link>
             </motion.div>
           </div>
 

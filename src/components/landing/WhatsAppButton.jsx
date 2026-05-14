@@ -2,8 +2,8 @@ import { motion } from 'framer-motion';
 import { MessageCircle } from 'lucide-react';
 
 export default function WhatsAppButton() {
-  const whatsappNumber = "254700000000"; // Replace with actual number
-  const message = "Hello SaxLink, I'd like to inquire about booking a saxophonist.";
+  const whatsappNumber = "254757566786";
+  const message = "Hello SaxLink, I'd like to make an enquiry as a client/musician.";
 
   return (
     <motion.a

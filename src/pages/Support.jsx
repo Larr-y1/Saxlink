@@ -82,9 +82,10 @@ export default function Support() {
           {/* Contact Methods */}
           <ContactCard 
             icon={MessageSquare}
-            title="Live Chat"
-            description="Speak with our team instantly for urgent inquiries."
+            title="WhatsApp Enquiries"
+            description="Speak with our elite concierge instantly for any inquiries."
             action="Start Chat"
+            href="https://wa.me/254757566786?text=Hello%20SaxLink%2C%20I'd%20like%20to%20make%20an%20enquiry%20as%20a%20client/musician."
             variants={itemVariants}
           />
           <ContactCard 
@@ -92,13 +93,15 @@ export default function Support() {
             title="Email Support"
             description="Send us a detailed message and we'll reply within 2 hours."
             action="Send Email"
+            href="mailto:support@saxlink.co"
             variants={itemVariants}
           />
           <ContactCard 
             icon={Phone}
-            title="Phone Call"
+            title="Direct Line"
             description="Available Mon-Fri, 9am - 6pm for direct support."
-            action="Call Us"
+            action="Call +254 757 566 786"
+            href="tel:+254757566786"
             variants={itemVariants}
           />
         </motion.div>
@@ -154,9 +157,11 @@ export default function Support() {
           <p className="opacity-90 max-w-xl mx-auto mb-8 relative z-10 font-light">
             Our support team is here to help you make your event extraordinary. Don't hesitate to reach out!
           </p>
-          <Button variant="secondary" className="rounded-xl px-8 py-6 h-auto font-bold uppercase tracking-widest gap-2 relative z-10 group">
-            Contact Us Now <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Button>
+          <a href="https://wa.me/254757566786?text=Hello%20SaxLink%2C%20I'd%20like%20to%20make%20an%20enquiry%20as%20a%20client/musician.">
+            <Button variant="secondary" className="rounded-xl px-8 py-6 h-auto font-bold uppercase tracking-widest gap-2 relative z-10 group">
+              Contact Us Now <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </a>
         </motion.div>
       </div>
       <Footer />
@@ -164,7 +169,7 @@ export default function Support() {
   );
 }
 
-function ContactCard({ icon: Icon, title, description, action, variants }) {
+function ContactCard({ icon: Icon, title, description, action, variants, href }) {
   return (
     <motion.div 
       variants={variants}
@@ -175,9 +180,17 @@ function ContactCard({ icon: Icon, title, description, action, variants }) {
       </div>
       <h3 className="font-heading text-xl font-bold text-foreground mb-3">{title}</h3>
       <p className="text-muted-foreground text-sm font-light leading-relaxed mb-6">{description}</p>
-      <Button variant="outline" className="rounded-xl w-full border-border hover:bg-secondary transition-all">
-        {action}
-      </Button>
+      {href ? (
+        <a href={href} target={href.startsWith('http') ? "_blank" : undefined} rel={href.startsWith('http') ? "noopener noreferrer" : undefined}>
+          <Button variant="outline" className="rounded-xl w-full border-border hover:bg-secondary transition-all">
+            {action}
+          </Button>
+        </a>
+      ) : (
+        <Button variant="outline" className="rounded-xl w-full border-border hover:bg-secondary transition-all">
+          {action}
+        </Button>
+      )}
     </motion.div>
   );
 }

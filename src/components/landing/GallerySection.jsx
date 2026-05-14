@@ -100,7 +100,9 @@ export default function GallerySection() {
                     muted
                     loop
                     playsInline
-                    className="w-full h-full object-cover grayscale-[0.5] group-hover:grayscale-0 group-hover:scale-110 transition-all [transition-duration:3s] ease-out"
+                    onMouseEnter={(e) => e.currentTarget.muted = false}
+                    onMouseLeave={(e) => e.currentTarget.muted = true}
+                    className="w-full h-full object-cover grayscale-[0.5] group-hover:grayscale-0 group-hover:scale-110 transition-all [transition-duration:3s] ease-out cursor-pointer"
                   />
                 ) : (
                   <img 

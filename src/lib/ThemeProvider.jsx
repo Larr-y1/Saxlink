@@ -11,9 +11,9 @@ export const useTheme = () => {
 export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(() => {
     if (typeof window !== 'undefined') {
-      return localStorage.getItem('saxlink-theme') || 'dark';
+      return localStorage.getItem('saxlink-theme') || 'light';
     }
-    return 'dark';
+    return 'light';
   });
 
   useEffect(() => {

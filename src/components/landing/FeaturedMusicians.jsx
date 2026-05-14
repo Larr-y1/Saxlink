@@ -255,7 +255,7 @@ export default function FeaturedMusicians() {
               </div>
             ))}
             <div className="w-16 h-16 rounded-full border-4 border-white dark:border-background bg-primary flex items-center justify-center text-white text-xs font-bold shadow-2xl transition-colors">
-              +{MUSICIANS.length - 6}
+              + 2
             </div>
           </div>
           

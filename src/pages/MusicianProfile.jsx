@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import SEO from '@/components/common/SEO';
-import { Star, BadgeCheck, MapPin, Clock, Globe, BarChart3, ArrowLeft, Calendar, CheckCircle, MessageCircle, Music2, Share2, Heart } from 'lucide-react';
+import { Star, BadgeCheck, MapPin, Clock, Globe, BarChart3, ArrowLeft, Calendar, CheckCircle, MessageCircle, Music2, Share2, Heart, Volume2, VolumeX, Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Link, useParams } from 'react-router-dom';
@@ -119,27 +119,41 @@ export default function MusicianProfile() {
                 </div>
               </motion.div>
 
-              {/* Performance Gallery */}
+              {/* Performance Gallery - TikTok Style */}
               {musician.performanceVideos && musician.performanceVideos.length > 0 && (
                 <motion.div variants={itemVariants} className="space-y-6">
-                  <h2 className="font-heading text-2xl font-bold text-foreground">Performance Gallery</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {musician.performanceVideos.map((videoUrl, index) => (
-                      <div key={index} className="bg-card border border-border rounded-[2rem] overflow-hidden shadow-lg group">
-                        <div className="aspect-video relative">
-                          <video 
-                            src={videoUrl} 
-                            autoPlay
-                            muted
-                            loop
-                            playsInline
-                            className="w-full h-full object-cover"
-                          >
-                            Your browser does not support the video tag.
-                          </video>
+                  <div className="flex items-center justify-between">
+                    <h2 className="font-heading text-2xl font-bold text-foreground">Performance Gallery</h2>
+                    <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Vertical Feed</span>
+                  </div>
+                  
+                  <div className="relative h-[600px] md:h-[700px] w-full max-w-sm mx-auto md:mx-0 overflow-hidden rounded-[3rem] border border-border bg-black shadow-2xl">
+                    <div className="h-full overflow-y-scroll snap-y snap-mandatory hide-scrollbar">
+                      {musician.performanceVideos.map((videoUrl, index) => (
+                        <TikTokVideo key={index} src={videoUrl} musicianName={musician.name} />
+                      ))}
+                    </div>
+                    {/* Interaction Hint */}
+                    <div className="absolute right-4 bottom-24 flex flex-col gap-6 z-20">
+                      <div className="flex flex-col items-center gap-1">
+                        <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white border border-white/20">
+                          <Heart className="w-6 h-6" />
                         </div>
+                        <span className="text-[10px] font-bold text-white uppercase tracking-tighter">Like</span>
                       </div>
-                    ))}
+                      <div className="flex flex-col items-center gap-1">
+                        <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white border border-white/20">
+                          <MessageCircle className="w-6 h-6" />
+                        </div>
+                        <span className="text-[10px] font-bold text-white uppercase tracking-tighter">Comm</span>
+                      </div>
+                      <div className="flex flex-col items-center gap-1">
+                        <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white border border-white/20">
+                          <Share2 className="w-6 h-6" />
+                        </div>
+                        <span className="text-[10px] font-bold text-white uppercase tracking-tighter">Share</span>
+                      </div>
+                    </div>
                   </div>
                 </motion.div>
               )}
@@ -319,6 +333,189 @@ function StatPill({ icon: IconComponent, label, value }) {
       </div>
       <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] mb-1">{label}</p>
       <p className="text-sm font-bold text-foreground tracking-tight">{value}</p>
+    </div>
+  );
+}
+
+function TikTokVideo({ src, musicianName }) {
+  const videoRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const [volume, setVolume] = useState(1);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.volume = volume;
+    }
+  }, [volume]);
+
+  useEffect(() => {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.6,
+    };
+
+    const handleIntersection = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const playPromise = videoRef.current?.play();
+          if (playPromise !== undefined) {
+            playPromise
+              .then(() => {
+                setIsPlaying(true);
+              })
+              .catch(() => {
+                setIsPlaying(false);
+              });
+          }
+        } else {
+          videoRef.current?.pause();
+          setIsPlaying(false);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleIntersection, options);
+    if (videoRef.current) {
+      observer.observe(videoRef.current);
+    }
+
+    return () => {
+      if (videoRef.current) {
+        observer.unobserve(videoRef.current);
+      }
+    };
+  }, []);
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        videoRef.current.play()
+          .then(() => setIsPlaying(true))
+          .catch(() => {});
+      }
+    }
+  };
+
+  const toggleMute = (e) => {
+    e.stopPropagation();
+    setIsMuted(!isMuted);
+  };
+
+  const handleVolumeChange = (e) => {
+    e.stopPropagation();
+    const newVolume = parseFloat(e.target.value);
+    setVolume(newVolume);
+    if (newVolume > 0) {
+      setIsMuted(false);
+    } else {
+      setIsMuted(true);
+    }
+  };
+
+  return (
+    <div 
+      className="relative h-full w-full snap-start bg-black flex items-center justify-center cursor-pointer overflow-hidden"
+      onClick={togglePlay}
+    >
+      <video
+        ref={videoRef}
+        src={src}
+        loop
+        muted={isMuted}
+        playsInline
+        className="h-full w-full object-cover"
+      />
+      
+      {/* Controls Container - Floating on the right */}
+      <div className="absolute top-1/2 -translate-y-1/2 right-4 flex flex-col gap-6 items-center z-40 bg-black/10 backdrop-blur-md p-3 rounded-full border border-white/10">
+        {/* Volume Control Group */}
+        <div className="flex flex-col items-center gap-2 group/volume">
+          <div className="relative flex flex-col items-center">
+            {/* Vertical Volume Slider - Visible on group hover */}
+            <div className="absolute bottom-14 opacity-0 group-hover/volume:opacity-100 transition-all duration-300 pointer-events-none group-hover/volume:pointer-events-auto bg-black/60 backdrop-blur-xl p-4 rounded-2xl border border-white/10 rotate-[-90deg] origin-bottom translate-y-[-50%]">
+              <input 
+                type="range" 
+                min="0" 
+                max="1" 
+                step="0.1" 
+                value={isMuted ? 0 : volume} 
+                onChange={handleVolumeChange}
+                className="w-24 h-1.5 bg-white/20 rounded-full appearance-none cursor-pointer accent-primary"
+              />
+            </div>
+            
+            <button 
+              onClick={toggleMute}
+              className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white shadow-xl hover:scale-110 active:scale-95 transition-all relative z-10"
+            >
+              {isMuted || volume === 0 ? <VolumeX className="w-6 h-6" /> : <Volume2 className="w-6 h-6" />}
+            </button>
+          </div>
+          <span className="text-[8px] font-black text-white uppercase tracking-tighter">Vol</span>
+        </div>
+
+        {/* Action Buttons (UI Only for TikTok feel) */}
+        <div className="flex flex-col items-center gap-1">
+          <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white border border-white/10 hover:bg-white/20 transition-all">
+            <Heart className="w-6 h-6" />
+          </div>
+          <span className="text-[8px] font-black text-white uppercase tracking-tighter">Like</span>
+        </div>
+
+        <div className="flex flex-col items-center gap-1">
+          <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white border border-white/10 hover:bg-white/20 transition-all">
+            <MessageCircle className="w-6 h-6" />
+          </div>
+          <span className="text-[8px] font-black text-white uppercase tracking-tighter">Comm</span>
+        </div>
+
+        <div className="flex flex-col items-center gap-1">
+          <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white border border-white/10 hover:bg-white/20 transition-all">
+            <Share2 className="w-6 h-6" />
+          </div>
+          <span className="text-[8px] font-black text-white uppercase tracking-tighter">Share</span>
+        </div>
+      </div>
+
+      {/* Tap for Audio Hint Overlay */}
+      {isMuted && isPlaying && (
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="absolute top-10 left-1/2 -translate-x-1/2 z-50"
+        >
+          <div className="bg-primary/90 backdrop-blur-xl px-6 py-2 rounded-full border border-white/20 flex items-center gap-2 text-white shadow-2xl">
+            <VolumeX className="w-4 h-4" />
+            <span className="text-[10px] font-black uppercase tracking-widest whitespace-nowrap">Tap for Audio</span>
+          </div>
+        </motion.div>
+      )}
+
+      {/* Play/Pause Overlay */}
+      {!isPlaying && (
+        <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none bg-black/20">
+          <div className="w-20 h-20 rounded-full bg-primary/40 backdrop-blur-md flex items-center justify-center border-2 border-white/20">
+            <Play className="w-10 h-10 text-white fill-white ml-1" />
+          </div>
+        </div>
+      )}
+
+      {/* Bottom Info Overlay */}
+      <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none z-30">
+        <div className="flex items-center gap-3 mb-3">
+          <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold border-2 border-white/20 shadow-lg">
+            {musicianName.charAt(0)}
+          </div>
+          <span className="font-bold text-white tracking-tight shadow-black drop-shadow-md">@{musicianName.toLowerCase().replace(/\s/g, '')}</span>
+          <BadgeCheck className="w-4 h-4 text-primary fill-white" />
+        </div>
+        <p className="text-white/90 text-sm font-light italic drop-shadow-md">Live performance from Obsidian Residency Sessions</p>
+      </div>
     </div>
   );
 }
