@@ -1,5 +1,6 @@
 
 import { motion } from 'framer-motion';
+import SEO from '@/components/common/SEO';
 import { BadgeCheck, Shield, BarChart3, ArrowRight as LucideArrowRight, Music, DollarSign, Calendar, Star, CheckCircle, XCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -40,6 +41,10 @@ const earningExample = [
 export default function ForMusicians() {
   return (
     <div className="min-h-[80vh] bg-white dark:bg-background relative overflow-hidden transition-colors duration-1000">
+      <SEO 
+        title="For Saxophonists" 
+        description="Join Kenya's first structured saxophone booking platform. Set your own rates, get verified, and manage your bookings from one dashboard."
+      />
       {/* THE HYBRID ANCHOR */}
       <div className="absolute top-0 left-0 w-full h-[600px] bg-black dark:bg-white/[0.02] transition-all duration-1000 z-0" />
       

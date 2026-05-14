@@ -1,9 +1,7 @@
 
-import { Search, MapPin, Calendar, ArrowRight, Music2, Sparkles } from 'lucide-react';
+import { ArrowRight, Music2, Sparkles } from 'lucide-react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
 import SoundWave from './SoundWave';
 import heroImg from '@/assets/hero-premium.png';
 
@@ -21,7 +19,7 @@ export default function HeroSection() {
   return (
     <section 
       onMouseMove={handleMouseMove}
-      className="relative min-h-[60vh] lg:min-h-[75vh] flex items-center justify-center overflow-hidden bg-background pt-24 pb-60 lg:pb-32 transition-colors duration-1000"
+      className="relative min-h-[60vh] lg:min-h-[75vh] flex items-center justify-center overflow-hidden bg-background pt-24 pb-24 lg:pb-32 transition-colors duration-1000"
     >
       {/* Background Video / Cinematic Layer */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -191,72 +189,6 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
-
-      {/* CONCIERGE SEARCH BAR - Overlapping the section break for a premium feel */}
-      <motion.div
-        initial={{ opacity: 0, y: 20, x: "-50%" }}
-        animate={{ opacity: 1, y: 0, x: "-50%" }}
-        transition={{ delay: 1, duration: 0.8, ease: "easeOut" }}
-        className="absolute bottom-0 left-1/2 w-full max-w-5xl px-4 md:px-6 z-30 translate-y-1/3 md:translate-y-3/4"
-      >
-        <div className="bg-white/95 dark:bg-card/80 backdrop-blur-3xl border border-primary/20 dark:border-white/10 p-1.5 md:p-2 rounded-[1.5rem] md:rounded-full shadow-2xl transition-colors">
-          <div className="grid grid-cols-1 md:grid-cols-4 items-stretch md:items-center">
-            
-            <div className="flex items-center gap-3 px-4 md:px-6 py-3 md:py-4 rounded-full hover:bg-primary/5 transition-all group border-b md:border-b-0 md:border-r border-primary/20 dark:border-white/5">
-              <MapPin className="w-4 h-4 text-primary shrink-0 group-hover:scale-110 transition-transform" />
-              <div className="flex-1">
-                <div className="text-[7px] md:text-[8px] font-black text-primary uppercase tracking-[0.1em] mb-0.5 opacity-80">Location</div>
-                <Select defaultValue="nairobi">
-                  <SelectTrigger className="border-none bg-transparent p-0 h-auto font-heading font-bold text-sm md:text-lg focus:ring-0 text-foreground dark:text-white transition-colors">
-                    <SelectValue placeholder="Where?" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white/95 dark:bg-background/95 backdrop-blur-xl border-primary/20 dark:border-white/10">
-                    <SelectItem value="nairobi">Nairobi</SelectItem>
-                    <SelectItem value="mombasa">Mombasa</SelectItem>
-                    <SelectItem value="kisumu">Kisumu</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3 px-4 md:px-6 py-3 md:py-4 rounded-full hover:bg-primary/5 transition-all group border-b md:border-b-0 md:border-r border-primary/20 dark:border-white/5">
-              <Music2 className="w-4 h-4 text-primary shrink-0 group-hover:scale-110 transition-transform" />
-              <div className="flex-1">
-                <div className="text-[7px] md:text-[8px] font-black text-primary uppercase tracking-[0.1em] mb-0.5 opacity-80">Event Type</div>
-                <Select defaultValue="wedding">
-                  <SelectTrigger className="border-none bg-transparent p-0 h-auto font-heading font-bold text-sm md:text-lg focus:ring-0 text-foreground dark:text-white transition-colors">
-                    <SelectValue placeholder="Vibe?" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white/95 dark:bg-background/95 backdrop-blur-xl border-primary/20 dark:border-white/10">
-                    <SelectItem value="wedding">Wedding Gala</SelectItem>
-                    <SelectItem value="corporate">Corporate Soirée</SelectItem>
-                    <SelectItem value="private">Private Lounge</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3 px-4 md:px-6 py-3 md:py-4 rounded-full hover:bg-primary/5 transition-all group border-b md:border-b-0 border-primary/20 dark:border-white/5">
-              <Calendar className="w-4 h-4 text-primary shrink-0 group-hover:scale-110 transition-transform" />
-              <div className="flex-1">
-                <div className="text-[7px] md:text-[8px] font-black text-primary uppercase tracking-[0.1em] mb-0.5 opacity-80">Schedule</div>
-                <Input 
-                  type="date" 
-                  className="border-none bg-transparent p-0 h-auto font-heading font-bold text-sm md:text-lg focus-visible:ring-0 text-secondary dark:text-white cursor-pointer transition-colors"
-                />
-              </div>
-            </div>
-
-            <div className="p-1.5">
-              <Button className="w-full h-12 md:h-16 rounded-full bg-primary hover:bg-primary/90 text-white shadow-xl transition-all hover:scale-[1.02] active:scale-95 text-sm md:text-base font-bold gap-2 premium-shadow border-none">
-                <Search className="w-4 h-4" />
-                Find Artist
-              </Button>
-            </div>
-
-          </div>
-        </div>
-      </motion.div>
     </section>
   );
 }

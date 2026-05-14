@@ -1,5 +1,6 @@
 
 import { motion } from 'framer-motion';
+import SEO from '@/components/common/SEO';
 import { Sparkles, ShieldCheck, Music2, Globe, Heart, Award, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -7,6 +8,10 @@ import { Link } from 'react-router-dom';
 export default function About() {
   return (
     <div className="min-h-screen bg-white dark:bg-background transition-colors duration-1000">
+      <SEO 
+        title="Our Manifesto" 
+        description="Learn about SaxLink's mission to redefine musical artistry and provide elite infrastructure for world-class saxophonists."
+      />
       {/* HERO SECTION - The Manifesto */}
       <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden pt-32 pb-20">
         <div className="absolute inset-0 z-0">

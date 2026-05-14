@@ -1,4 +1,5 @@
 
+import SEO from '@/components/common/SEO';
 import HeroSection from '@/components/landing/HeroSection';
 import MarqueeBanner from '@/components/landing/MarqueeBanner';
 import StatsSection from '@/components/landing/StatsSection';
@@ -16,6 +17,10 @@ import CTASection from '@/components/landing/CTASection';
 export default function Home() {
   return (
     <div className="flex flex-col w-full">
+      <SEO 
+        title="Premium Saxophonist Booking" 
+        description="The ultimate platform to book world-class saxophonists for your weddings, corporate events, and private parties."
+      />
       <HeroSection />
       <MarqueeBanner />
       <StatsSection />

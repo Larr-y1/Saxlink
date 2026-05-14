@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Clock, ArrowRight } from 'lucide-react';
+import SEO from '@/components/common/SEO';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/landing/Navbar';
@@ -84,6 +85,10 @@ export default function Blog() {
 
   return (
     <div className="min-h-[80vh] bg-white dark:bg-background relative overflow-hidden transition-colors duration-1000">
+      <SEO 
+        title="Insights & Editorial" 
+        description="Explore stories, technical guides, and artisan insights from the world of elite live music in Kenya on the SaxLink blog."
+      />
       {/* THE HYBRID ANCHOR */}
       <div className="absolute top-0 left-0 w-full h-[600px] bg-black dark:bg-white/[0.02] transition-all duration-1000 z-0" />
       

@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import SEO from '@/components/common/SEO';
 import { Search, Star, BadgeCheck, MapPin, ArrowRight as LucideArrowRight, Filter, SortAsc } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -45,6 +46,10 @@ export default function Browse() {
 
   return (
     <div className="min-h-[80vh] bg-white dark:bg-background relative overflow-hidden transition-colors duration-1000 pb-32">
+      <SEO 
+        title="Browse Saxophonists" 
+        description="Explore our elite registry of world-class saxophonists in Kenya. Filter by location, genre, and event type."
+      />
       {/* THE HYBRID ANCHOR */}
       <div className="absolute top-0 left-0 w-full h-[600px] bg-black dark:bg-white/[0.02] transition-all duration-1000 z-0" />
       

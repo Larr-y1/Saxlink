@@ -1,5 +1,6 @@
 
 import { motion } from 'framer-motion';
+import SEO from '@/components/common/SEO';
 import { Check, ArrowRight as LucideArrowRight, Shield, DollarSign, HelpCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -69,6 +70,10 @@ const faqs = [
 export default function PricingPage() {
   return (
     <div className="min-h-[80vh] bg-white dark:bg-background relative overflow-hidden transition-colors duration-1000">
+      <SEO 
+        title="Pricing & Economics" 
+        description="Simple, transparent pricing. No subscription fees. SaxLink only earns when you do. Explore our Obsidian Access and Elite Residency tiers."
+      />
       {/* THE HYBRID ANCHOR */}
       <div className="absolute top-0 left-0 w-full h-[600px] bg-black dark:bg-white/[0.02] transition-all duration-1000 z-0" />
       

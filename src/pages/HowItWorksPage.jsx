@@ -1,5 +1,6 @@
 
 import { motion } from 'framer-motion';
+import SEO from '@/components/common/SEO';
 import { Shield, ArrowRight as LucideArrowRight, Bell, Sparkles, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -129,6 +130,10 @@ const guarantees = [
 export default function HowItWorksPage() {
   return (
     <div className="min-h-[80vh] bg-white dark:bg-background relative overflow-hidden transition-colors duration-1000">
+      <SEO 
+        title="The Operational Manual" 
+        description="Discover how SaxLink connects elite saxophonists with prestigious clients through a secured escrow vault and direct engagement."
+      />
       {/* THE HYBRID ANCHOR */}
       <div className="absolute top-0 left-0 w-full h-[600px] bg-black dark:bg-white/[0.02] transition-all duration-1000 z-0" />
       

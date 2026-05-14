@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import SEO from '@/components/common/SEO';
 import { Star, BadgeCheck, MapPin, Clock, Globe, BarChart3, ArrowLeft, Calendar, CheckCircle, MessageCircle, Music2, Share2, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -36,6 +37,11 @@ export default function MusicianProfile() {
 
   return (
     <div className="min-h-[80vh] bg-background text-foreground">
+      <SEO 
+        title={`${musician.name} | ${musician.genre} Saxophonist`}
+        description={`Book ${musician.name}, a verified ${musician.genre} saxophonist in ${musician.location}. Rated ${musician.rating}/5 with ${musician.reviews} reviews.`}
+        image={musician.img}
+      />
       <Navbar />
       
       <div className="pt-24">
