@@ -53,6 +53,7 @@ const Navbar = () => {
         {/* Desktop Nav */}
         <div className="hidden lg:flex items-center space-x-2">
           <NavLink to="/browse">Discover Artists</NavLink>
+          <NavLink to="/book">Find a Musician</NavLink>
           <NavLink to="/how-it-works">Experience</NavLink>
           <NavLink to="/about">Philosophy</NavLink>
           <NavLink to="/pricing">Investment</NavLink>
@@ -132,6 +133,7 @@ const Navbar = () => {
             <div className="flex flex-col space-y-2">
               {[
                 { label: 'Discover Artists', href: '/browse' },
+                { label: 'Find a Musician', href: '/book' },
                 { label: 'The Experience', href: '/how-it-works' },
                 { label: 'Philosophy', href: '/about' },
                 { label: 'Investment', href: '/pricing' },

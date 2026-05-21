@@ -83,6 +83,7 @@ export default function Footer() {
             <ul className="space-y-4">
               {[
                 { label: 'Browse Artists', href: '/browse' },
+                { label: 'Find a Musician', href: '/book' },
                 { label: 'Booking Protocol', href: '/how-it-works' },
                 { label: 'Our Philosophy', href: '/about' },
                 { label: 'Concierge Support', href: '/support' },
