@@ -83,7 +83,7 @@ const ArtistCard = forwardRef(({ artist }, ref) => {
           <div className="absolute bottom-0 left-0 w-full p-8 md:p-12 z-20 translate-z-20">
             <div className="mb-4 flex items-center gap-3">
               <div className="w-8 h-px bg-primary" />
-              <span className="text-[10px] font-bold text-primary uppercase tracking-[0.3em]">{artist.genre.split(' ')[0]} Specialist</span>
+              <span className="text-[10px] font-bold text-primary uppercase tracking-[0.3em]">{artist.instrument} Specialist</span>
             </div>
 
             <h3 className="font-heading text-4xl md:text-5xl font-black text-white leading-tight mb-6 group-hover:text-primary transition-colors duration-500">
@@ -169,7 +169,7 @@ export default function FeaturedMusicians() {
               Curated <span className="italic font-light text-primary">Artistry.</span>
             </h2>
             <p className="text-lg text-foreground dark:text-white/60 font-medium md:font-light leading-relaxed transition-colors">
-              We vet thousands of performers to bring you only the top 1% of saxophonists worldwide. Discover voices that redefine elegance.
+              We vet thousands of performers to bring you only the top 1% of musicians worldwide. Discover talent that redefines elegance.
             </p>
           </motion.div>
           

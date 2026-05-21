@@ -2,14 +2,16 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Sun, Moon, Menu, X, ArrowRight, Sparkles } from 'lucide-react';
+import { Sun, Moon, Menu, X, ArrowRight, Sparkles, User, LogOut } from 'lucide-react';
 import { useTheme } from '@/lib/ThemeProvider';
+import { useAppStore } from '@/store/useAppStore';
 import Logo from '@/components/common/Logo';
 
 const Navbar = () => {
   const { theme, toggle } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { user, isAuthenticated, logout } = useAppStore();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,15 +67,34 @@ const Navbar = () => {
               {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </motion.button>
             
-            <Link to="/login" className="group flex items-center gap-3">
-              <span className="text-[11px] font-black uppercase tracking-[0.4em] text-muted-foreground group-hover:text-primary transition-colors">
-                Sign In
-              </span>
-            </Link>
+            {isAuthenticated ? (
+              <div className="flex items-center gap-6">
+                <div className="flex flex-col items-end">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-primary leading-none">Artisan Partner</span>
+                  <span className="text-xs font-bold text-foreground dark:text-white">{user.name}</span>
+                </div>
+                <motion.button
+                  whileTap={{ scale: 0.9 }}
+                  onClick={logout}
+                  className="w-10 h-10 rounded-xl bg-destructive/10 text-destructive flex items-center justify-center hover:bg-destructive hover:text-white transition-all"
+                  title="Logout"
+                >
+                  <LogOut className="h-4 w-4" />
+                </motion.button>
+              </div>
+            ) : (
+              <>
+                <Link to="/login" className="group flex items-center gap-3">
+                  <span className="text-[11px] font-black uppercase tracking-[0.4em] text-muted-foreground group-hover:text-primary transition-colors">
+                    Sign In
+                  </span>
+                </Link>
 
-            <Button asChild className="rounded-full px-8 py-4 bg-foreground text-background dark:bg-white dark:text-black font-black text-[11px] uppercase tracking-[0.3em] hover:bg-primary hover:text-white transition-all hover:scale-105 shadow-2xl">
-              <Link to="/early-access">Join Circle</Link>
-            </Button>
+                <Button asChild className="rounded-full px-8 py-4 bg-foreground text-background dark:bg-white dark:text-black font-black text-[11px] uppercase tracking-[0.3em] hover:bg-primary hover:text-white transition-all hover:scale-105 shadow-2xl">
+                  <Link to="/early-access">Join Circle</Link>
+                </Button>
+              </>
+            )}
           </div>
         </div>
 
@@ -115,7 +136,10 @@ const Navbar = () => {
                 { label: 'Philosophy', href: '/about' },
                 { label: 'Investment', href: '/pricing' },
                 { label: 'Support', href: '/support' },
-                { label: 'Sign In', href: '/login' },
+                ...(isAuthenticated 
+                  ? [{ label: 'Dashboard', href: '/dashboard' }] 
+                  : [{ label: 'Sign In', href: '/login' }]
+                ),
               ].map((item, idx) => (
                 <motion.div
                   key={item.label}
@@ -133,18 +157,39 @@ const Navbar = () => {
                   </Link>
                 </motion.div>
               ))}
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="pt-6 mt-4 border-t border-black/5 dark:border-white/10"
-              >
-                <Button asChild className="rounded-2xl w-full py-10 text-[12px] font-black uppercase tracking-[0.5em] bg-primary hover:bg-primary/90 text-white shadow-2xl shadow-primary/30 group">
-                  <Link to="/early-access" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-center gap-4">
-                    Join Early Access <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-                  </Link>
-                </Button>
-              </motion.div>
+              
+              {isAuthenticated ? (
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="pt-6 mt-4 border-t border-black/5 dark:border-white/10"
+                >
+                  <Button 
+                    onClick={() => {
+                      logout();
+                      setMobileMenuOpen(false);
+                    }}
+                    variant="destructive"
+                    className="rounded-2xl w-full py-10 text-[12px] font-black uppercase tracking-[0.5em] group"
+                  >
+                    Sign Out <LogOut className="ml-4 w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                  </Button>
+                </motion.div>
+              ) : (
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="pt-6 mt-4 border-t border-black/5 dark:border-white/10"
+                >
+                  <Button asChild className="rounded-2xl w-full py-10 text-[12px] font-black uppercase tracking-[0.5em] bg-primary hover:bg-primary/90 text-white shadow-2xl shadow-primary/30 group">
+                    <Link to="/early-access" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-center gap-4">
+                      Join Early Access <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                    </Link>
+                  </Button>
+                </motion.div>
+              )}
             </div>
           </motion.div>
         )}

@@ -125,7 +125,7 @@ export default function StatsSection() {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[280px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-auto">
           {stats.map((s, idx) => (
             <motion.div 
               key={s.label}
@@ -133,7 +133,7 @@ export default function StatsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: idx * 0.1 }}
-              className={`group relative bg-white/40 dark:bg-white/[0.02] border border-primary/10 dark:border-white/10 rounded-[3rem] p-10 overflow-hidden hover:border-primary/30 transition-all duration-700 flex flex-col justify-between ${s.grid}`}
+              className={`group relative bg-white/40 dark:bg-white/[0.02] border border-primary/10 dark:border-white/10 rounded-[3rem] p-8 md:p-10 overflow-hidden hover:border-primary/30 transition-all duration-700 flex flex-col justify-between ${s.grid}`}
             >
               {/* Card Background Watermark Number */}
               <div className="absolute -bottom-6 -right-6 text-[12rem] font-black text-primary/[0.03] dark:text-primary/[0.03] select-none pointer-events-none transition-transform duration-700 group-hover:scale-110 group-hover:-rotate-6">
@@ -153,7 +153,7 @@ export default function StatsSection() {
                   <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
                   {s.sub}
                 </p>
-                <p className="text-sm text-black dark:text-white/80 font-medium md:font-light leading-relaxed max-w-[200px] opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                <p className="text-sm text-black dark:text-white/80 font-medium md:font-light leading-relaxed max-w-full">
                   {s.detail}
                 </p>
               </div>

@@ -4,6 +4,7 @@ import HeroSection from '@/components/landing/HeroSection';
 import MarqueeBanner from '@/components/landing/MarqueeBanner';
 import StatsSection from '@/components/landing/StatsSection';
 import HowItWorks from '@/components/landing/HowItWorks';
+import BenefitsSection from '@/components/landing/BenefitsSection';
 import FeaturedMusicians from '@/components/landing/FeaturedMusicians';
 import CuratedCollections from '@/components/landing/CuratedCollections';
 import TrustSection from '@/components/landing/TrustSection';
@@ -18,13 +19,14 @@ export default function Home() {
   return (
     <div className="flex flex-col w-full">
       <SEO 
-        title="Premium Saxophonist Booking" 
-        description="The ultimate platform to book world-class saxophonists for your weddings, corporate events, and private parties."
+        title="Premium Musician Booking" 
+        description="The ultimate platform to book world-class musicians for your weddings, corporate events, and private parties."
       />
       <HeroSection />
       <MarqueeBanner />
       <StatsSection />
       <HowItWorks />
+      <BenefitsSection />
       <FeaturedMusicians />
       <CuratedCollections />
       <TrustSection />

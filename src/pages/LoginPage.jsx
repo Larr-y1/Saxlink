@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAppStore } from '@/store/useAppStore';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { 
@@ -21,11 +22,21 @@ const LoginPage = () => {
   const [step, setStep] = useState(1);
   const [email, setEmail] = useState('');
   const navigate = useNavigate();
+  const login = useAppStore(state => state.login);
 
   const handleNext = () => {
     if (step === 1 && email) {
       setStep(2);
     }
+  };
+
+  const handleLogin = () => {
+    // Mock login
+    login({ email, name: email.split('@')[0] });
+    
+    // Redirect back to where they came from or home
+    const from = new URLSearchParams(window.location.search).get('from') || '/';
+    navigate(from);
   };
 
   const handleBack = () => {
@@ -249,7 +260,10 @@ const LoginPage = () => {
                       <button className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-primary hover:tracking-[0.3em] transition-all">Recover Key</button>
                     </div>
 
-                    <Button className="w-full h-14 md:h-18 rounded-2xl text-[10px] md:text-[11px] font-black uppercase tracking-[0.4em] bg-primary hover:bg-primary/90 text-white shadow-2xl shadow-primary/40 transition-all duration-700 group">
+                    <Button 
+                      onClick={handleLogin}
+                      className="w-full h-14 md:h-18 rounded-2xl text-[10px] md:text-[11px] font-black uppercase tracking-[0.4em] bg-primary hover:bg-primary/90 text-white shadow-2xl shadow-primary/40 transition-all duration-700 group"
+                    >
                       Authenticate
                       <Sparkles className="ml-2 md:ml-3 h-4 w-4 md:h-5 md:w-5 transition-all group-hover:scale-125" />
                     </Button>

@@ -4,10 +4,11 @@ import SEO from '@/components/common/SEO';
 import { Star, BadgeCheck, MapPin, Clock, Globe, BarChart3, ArrowLeft, Calendar, CheckCircle, MessageCircle, Music2, Share2, Heart, Volume2, VolumeX, Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/landing/Navbar';
 import Footer from '@/components/landing/Footer';
 import { MUSICIANS } from '@/lib/musicians-data';
+import { useAppStore } from '@/store/useAppStore';
 
 const sampleReviews = [
   { name: 'Sarah M.', initials: 'SM', date: 'April 2025', rating: 5, comment: 'Absolutely phenomenal performance. Our guests were captivated all evening. Will book again!' },
@@ -19,6 +20,8 @@ export default function MusicianProfile() {
   const { id } = useParams();
   const musician = MUSICIANS.find((m) => m.id === parseInt(id)) || MUSICIANS[0];
   const [date, setDate] = useState('');
+  const navigate = useNavigate();
+  const isAuthenticated = useAppStore(state => state.isAuthenticated);
 
   const others = MUSICIANS.filter((m) => m.id !== musician.id).slice(0, 3);
 
@@ -232,8 +235,11 @@ export default function MusicianProfile() {
                         <p className="font-bold text-base text-foreground group-hover:text-primary transition-colors">{m.name}</p>
                         <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mt-1">{m.location}</p>
                         <div className="flex items-center justify-between mt-4 pt-4 border-t border-border/50">
-                          <span className="text-sm font-bold text-foreground">KES {m.price.toLocaleString()}</span>
-                          <Star className="w-3 h-3 fill-primary text-primary" />
+                          <span className="text-sm font-bold text-foreground">{m.instrument} Specialist</span>
+                          <div className="flex items-center gap-1">
+                            <span className="text-xs font-bold">{m.rating}</span>
+                            <Star className="w-3 h-3 fill-primary text-primary" />
+                          </div>
                         </div>
                       </div>
                     </Link>
@@ -253,10 +259,9 @@ export default function MusicianProfile() {
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
                 
                 <div className="flex flex-col gap-1 mb-8">
-                  <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Investment</span>
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-3xl font-heading font-bold text-foreground">KES {musician.price.toLocaleString()}</span>
-                    <span className="text-xs text-muted-foreground font-light">/ event</span>
+                  <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Artisan Identification</span>
+                  <div className="mt-2 flex items-center justify-center w-20 h-20 rounded-3xl bg-primary/10 border border-primary/20 text-4xl font-heading font-black text-primary shadow-inner">
+                    {musician.name.charAt(0)}
                   </div>
                 </div>
 
@@ -286,11 +291,18 @@ export default function MusicianProfile() {
                 </div>
 
                 <div className="space-y-3">
-                  <Link to={`/book/${musician.id}`}>
-                    <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-2xl py-8 text-sm font-bold uppercase tracking-widest shadow-xl shadow-primary/20 transition-all hover:scale-[1.02]">
-                      Reserve Now
-                    </Button>
-                  </Link>
+                  <Button 
+                    onClick={() => {
+                      if (!isAuthenticated) {
+                        navigate(`/login?from=/book/${musician.id}`);
+                      } else {
+                        navigate(`/book/${musician.id}`);
+                      }
+                    }}
+                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-2xl py-8 text-sm font-bold uppercase tracking-widest shadow-xl shadow-primary/20 transition-all hover:scale-[1.02]"
+                  >
+                    Reserve Now
+                  </Button>
                   <Button variant="outline" className="w-full rounded-2xl py-8 text-sm font-bold uppercase tracking-widest gap-3 border-border hover:bg-secondary/50 transition-all">
                     <MessageCircle className="w-4 h-4" /> Message Artist
                   </Button>

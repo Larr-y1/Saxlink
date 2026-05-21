@@ -1,6 +1,12 @@
 import { create } from 'zustand';
 
 export const useAppStore = create((set, get) => ({
+  // Auth state
+  user: null,
+  isAuthenticated: false,
+  login: (userData) => set({ user: userData, isAuthenticated: true }),
+  logout: () => set({ user: null, isAuthenticated: false }),
+
   // UI state
   sidebarCollapsed: false,
   toggleSidebar: () => set((s) => ({ sidebarCollapsed: !s.sidebarCollapsed })),

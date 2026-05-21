@@ -16,6 +16,7 @@ import PricingPage from '@/pages/PricingPage';
 import About from '@/pages/About';
 import RoleSelector from '@/pages/RoleSelector';
 import BookingRequest from '@/pages/BookingRequest';
+import FindMusician from '@/pages/FindMusician';
 import LoginPage from '@/pages/LoginPage';
 import TermsOfService from '@/pages/TermsOfService';
 import CookiePolicy from '@/pages/CookiePolicy';
@@ -48,7 +49,7 @@ const AppContent = () => {
           <Route path="/about" element={<About />} />
           <Route path="/role-selector" element={<RoleSelector />} />
           <Route path="/book/:id" element={<BookingRequest />} />
-          <Route path="/book" element={<Navigate to="/browse" replace />} />
+          <Route path="/book" element={<FindMusician />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<EarlyAccess />} />
           <Route path="/terms" element={<TermsOfService />} />

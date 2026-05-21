@@ -133,13 +133,13 @@ export default function HowItWorks() {
                 </svg>
               </div>
 
-              <span className="text-[11px] font-black text-primary uppercase tracking-[0.6em] mb-8 block">The Artisan's Journey</span>
+              <span className="text-[11px] font-black text-primary uppercase tracking-[0.6em] mb-8 block">How it works</span>
               <h2 className="font-heading text-6xl md:text-7xl font-black tracking-tighter leading-[0.9] text-black dark:text-white">
-                A Seamless <br />
-                <span className="italic font-light text-primary/80">Rhythmic Flow.</span>
+                Reliable <br />
+                <span className="italic font-light text-primary/80">Convenience.</span>
               </h2>
               <p className="mt-12 text-black/80 dark:text-white/90 font-medium md:font-light leading-relaxed">
-                Four phases of performance management, engineered for absolute transparency.
+                SaxLink is a platform that helps hotels, restaurants, event organizers, and clients easily find, book, and manage professional live musicians in a more structured, reliable, and convenient way.
               </p>
             </div>
           </motion.div>

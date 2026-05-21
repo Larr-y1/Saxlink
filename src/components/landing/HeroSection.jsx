@@ -1,6 +1,7 @@
 
+import { useState, useEffect } from 'react';
 import { ArrowRight, Music2, Sparkles } from 'lucide-react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import SoundWave from './SoundWave';
@@ -9,6 +10,15 @@ import heroImg from '@/assets/hero-premium.png';
 export default function HeroSection() {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
+  const [index, setIndex] = useState(0);
+  const musicians = ["Saxophonist", "Violinist", "Band", "Vocalist", "Pianist"];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % musicians.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
 
   const handleMouseMove = (e) => {
     const { clientX, clientY } = e;
@@ -77,7 +87,20 @@ export default function HeroSection() {
                     transition={{ duration: 4, repeat: Infinity }}
                   />
                 </span>
-                <span className="block mt-2 font-heading">Saxophonist</span>
+                <div className="relative h-[1.1em] overflow-hidden mt-2">
+                  <AnimatePresence mode="wait">
+                    <motion.span
+                      key={musicians[index]}
+                      initial={{ y: 50, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: -50, opacity: 0 }}
+                      transition={{ duration: 0.5, ease: "circOut" }}
+                      className="block font-heading text-foreground dark:text-white"
+                    >
+                      {musicians[index]}
+                    </motion.span>
+                  </AnimatePresence>
+                </div>
                 <span className="block mt-2 text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-foreground dark:text-foreground/80 transition-colors">for Your Event</span>
               </motion.h1>
               
@@ -118,7 +141,7 @@ export default function HeroSection() {
               transition={{ delay: 0.4 }}
               className="mt-6 md:mt-8 text-base md:text-xl text-foreground dark:text-white/60 max-w-lg mx-auto lg:mx-0 leading-relaxed font-medium md:font-light transition-colors"
             >
-              Book verified, world-class saxophonists for weddings, corporate events, restaurants, and private parties — all in one place.
+              Book verified, world-class musicians for weddings, corporate events, restaurants, and private parties — all in one place.
             </motion.p>
 
             <motion.div 
@@ -128,10 +151,10 @@ export default function HeroSection() {
               className="flex flex-wrap justify-center lg:justify-start gap-4 md:gap-6 mt-8 md:mt-12"
             >
               <MagneticButton>
-                <Link to="/browse">
+                <Link to="/book">
                   <Button className="rounded-full px-6 md:px-10 py-5 md:py-6 text-sm md:text-base bg-primary hover:bg-primary/90 text-white shadow-xl transition-all group overflow-hidden relative border-none">
                     <span className="relative z-10 flex items-center">
-                      Discover Artists <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-3 group-hover:translate-x-2 transition-transform" />
+                      Book a Musician <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-3 group-hover:translate-x-2 transition-transform" />
                     </span>
                     <motion.div 
                       className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500"

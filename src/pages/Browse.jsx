@@ -15,7 +15,6 @@ export default function Browse() {
   const [location, setLocation] = useState('All Cities');
   const [genre, setGenre] = useState('All');
   const [event, setEvent] = useState('All Events');
-  const [maxPrice, setMaxPrice] = useState([20000]);
   const [sortBy, setSortBy] = useState('rating');
   const [showFilters, setShowFilters] = useState(false);
 
@@ -25,23 +24,19 @@ export default function Browse() {
         const matchSearch = !search || m.name.toLowerCase().includes(search.toLowerCase()) || m.genre.toLowerCase().includes(search.toLowerCase());
         const matchLocation = location === 'All Cities' || m.location === location;
         const matchGenre = genre === 'All' || m.genre.toLowerCase().includes(genre.toLowerCase());
-        const matchPrice = m.price <= maxPrice[0];
-        return matchSearch && matchLocation && matchGenre && matchPrice;
+        return matchSearch && matchLocation && matchGenre;
       })
       .sort((a, b) => {
         if (sortBy === 'rating') return b.rating - a.rating;
-        if (sortBy === 'price_low') return a.price - b.price;
-        if (sortBy === 'price_high') return b.price - a.price;
         if (sortBy === 'reviews') return b.reviews - a.reviews;
         return 0;
       });
-  }, [search, location, genre, maxPrice, sortBy]);
+  }, [search, location, genre, sortBy]);
 
   const activeFilterCount = [
     location !== 'All Cities',
     genre !== 'All',
     event !== 'All Events',
-    maxPrice[0] < 20000,
   ].filter(Boolean).length;
 
   return (
@@ -138,8 +133,6 @@ export default function Browse() {
                     </SelectTrigger>
                     <SelectContent className="rounded-[2rem] border-primary/10 dark:border-white/10 bg-white/90 dark:bg-background backdrop-blur-3xl p-4">
                       <SelectItem value="rating" className="rounded-xl px-6 py-4 text-[10px] font-black uppercase tracking-widest cursor-pointer">Top Rated</SelectItem>
-                      <SelectItem value="price_low" className="rounded-xl px-6 py-4 text-[10px] font-black uppercase tracking-widest cursor-pointer">Price: Low to High</SelectItem>
-                      <SelectItem value="price_high" className="rounded-xl px-6 py-4 text-[10px] font-black uppercase tracking-widest cursor-pointer">Price: High to Low</SelectItem>
                       <SelectItem value="reviews" className="rounded-xl px-6 py-4 text-[10px] font-black uppercase tracking-widest cursor-pointer">Most Reviews</SelectItem>
                     </SelectContent>
                   </Select>
@@ -156,7 +149,7 @@ export default function Browse() {
                   exit={{ opacity: 0, y: -20 }}
                   className="absolute top-full left-0 w-full z-20"
                 >
-                  <div className="bg-white/95 dark:bg-background/95 backdrop-blur-3xl border border-primary/10 dark:border-white/10 rounded-[2rem] p-6 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.2)] grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                  <div className="bg-white/95 dark:bg-background/95 backdrop-blur-3xl border border-primary/10 dark:border-white/10 rounded-[2rem] p-6 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.2)] grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     <FilterGroup label="Institutional Region">
                       <Select value={location} onValueChange={setLocation}>
                         <SelectTrigger className="rounded-2xl border-primary/10 dark:border-white/10 bg-secondary/5 dark:bg-white/5 h-16 text-[10px] font-black uppercase tracking-widest px-6">
@@ -189,21 +182,6 @@ export default function Browse() {
                         </SelectContent>
                       </Select>
                     </FilterGroup>
-
-                    <FilterGroup label={`Technical Rate: KES ${maxPrice[0].toLocaleString()}`}>
-                      <div className="pt-6">
-                        <Slider
-                          min={3000} max={20000} step={500}
-                          value={maxPrice}
-                          onValueChange={setMaxPrice}
-                          className="py-4"
-                        />
-                        <div className="flex justify-between text-[9px] text-primary font-black tracking-[0.3em] uppercase mt-4">
-                          <span>3k</span>
-                          <span>20k+</span>
-                        </div>
-                      </div>
-                    </FilterGroup>
                   </div>
                 </motion.div>
               )}
@@ -229,7 +207,7 @@ export default function Browse() {
               <Button 
                 variant="ghost" 
                 className="rounded-full px-12 py-8 text-[11px] font-black uppercase tracking-[0.4em] border border-primary/20 hover:bg-primary hover:text-white transition-all duration-700"
-                onClick={() => { setSearch(''); setLocation('All Cities'); setGenre('All'); setMaxPrice([20000]); }}
+                onClick={() => { setSearch(''); setLocation('All Cities'); setGenre('All'); }}
               >
                 Reset Parameters
               </Button>
@@ -298,9 +276,9 @@ export default function Browse() {
 
                         <div className="pt-6 border-t border-primary/10 dark:border-white/5 flex items-end justify-between">
                           <div>
-                            <p className="text-[9px] font-black text-gray-700 dark:text-white/20 uppercase tracking-[0.4em] mb-1.5 transition-colors">Honorarium_Starting</p>
-                            <span className="text-2xl font-heading font-black text-black dark:text-white group-hover:text-primary transition-colors duration-700">
-                              KES {m.price.toLocaleString()}
+                            <p className="text-[9px] font-black text-gray-700 dark:text-white/20 uppercase tracking-[0.4em] mb-1.5 transition-colors">Instrument</p>
+                            <span className="text-2xl font-heading font-black text-black dark:text-white group-hover:text-primary transition-colors duration-700 uppercase">
+                              {m.category}
                             </span>
                           </div>
                         </div>
